@@ -1,0 +1,271 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.main-container {
+  margin: auto;
+  height: 900px;
+  width: 900px;
+  padding: 1rem;
+  padding-top: 1.7rem;
+  background-color: rgba(206, 147, 70, 0.637);
+}
+
+.circle-container {
+  margin: auto;
+  position: relative;
+  width: 53em;
+  height: 53em;
+  border-radius: 50%;
+  background-image: url(IMG/ruleta\ tambor.png);
+  background-position: center;
+  background-size: cover;
+  background-color: rgb(157, 166, 175);
+}
+.circle {
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  width: 4em;
+  height: 4em;
+  margin: -2em;
+  background-image: url(IMG/Sb7mmRemMagG_edited\ small.jpg);
+  background-color: rgba(192, 194, 61, 0.829);
+  text-align: center;
+  padding: 0.3rem;
+}
+
+.circle-container h2 {
+  font-size: 3.2rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.A {
+  transform: rotate(-90deg) translate(24em) rotate(90deg);
+}
+.B {
+  transform: rotate(-76.67deg) translate(24em) rotate(76.67deg);
+}
+.C {
+  transform: rotate(-63.34deg) translate(24em) rotate(63.34deg);
+}
+.D {
+  transform: rotate(-50.01deg) translate(24em) rotate(50.01deg);
+}
+.E {
+  transform: rotate(-36.68deg) translate(24em) rotate(36.68deg);
+}
+.F {
+  transform: rotate(-23.35deg) translate(24em) rotate(23.35deg);
+}
+.G {
+  transform: rotate(-10.02deg) translate(24em) rotate(10.02deg);
+}
+.H {
+  transform: rotate(3.3deg) translate(24em) rotate(-3.3deg);
+}
+.I {
+  transform: rotate(16.64deg) translate(24em) rotate(-16.64deg);
+}
+.J {
+  transform: rotate(29.97deg) translate(24em) rotate(-29.97deg);
+}
+.K {
+  transform: rotate(43.3deg) translate(24em) rotate(-43.3deg);
+}
+.L {
+  transform: rotate(56.63deg) translate(24em) rotate(-56.63deg);
+}
+.M {
+  transform: rotate(69.96deg) translate(24em) rotate(-69.96deg);
+}
+.N {
+  transform: rotate(83.29deg) translate(24em) rotate(-83.29deg);
+}
+.Ñ {
+  transform: rotate(96.62deg) translate(24em) rotate(-96.62deg);
+  padding-top: 0.6rem;
+}
+.O {
+  transform: rotate(109.95deg) translate(24em) rotate(-109.95deg);
+}
+.P {
+  transform: rotate(123.28deg) translate(24em) rotate(-123.28deg);
+}
+.Q {
+  transform: rotate(136.61deg) translate(24em) rotate(-136.61deg);
+}
+.R {
+  transform: rotate(149.94deg) translate(24em) rotate(-149.94deg);
+}
+.S {
+  transform: rotate(163.27deg) translate(24em) rotate(-163.27deg);
+}
+.T {
+  transform: rotate(176.6deg) translate(24em) rotate(-176.6deg);
+}
+.U {
+  transform: rotate(189.93deg) translate(24em) rotate(-189.93deg);
+}
+.V {
+  transform: rotate(203.26deg) translate(24em) rotate(-203.26deg);
+}
+.W {
+  transform: rotate(216.59deg) translate(24em) rotate(-216.59deg);
+  padding-top: 0.5rem;
+}
+.X {
+  transform: rotate(229.92deg) translate(24em) rotate(-229.92deg);
+}
+.Y {
+  transform: rotate(243.25deg) translate(24em) rotate(-243.25deg);
+}
+.Z {
+  transform: rotate(256.58deg) translate(24em) rotate(-256.58deg);
+}
+
+.rules{
+	font-size: 1.5rem;
+	display: block;
+    position: absolute;
+	
+}
+
+.ranking{
+	font-size: 1.5rem;
+	display: block;
+    position: absolute;
+    right: 0;
+}
