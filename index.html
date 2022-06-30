@@ -16,49 +16,54 @@
   <body>
     <div class="main-container">
       <div class="circle-container">
-        <h3 class="rules">Rules</h3>
-        <h3 class="ranking">Ranking</h3>
+        <h3 class="reglas">Reglas</h3>
+        <p class="reglas-text ds-none">Reglas<br>Tenemos que contestar a una pregunta por cada letra del alfabeto en menos de 3 minutos.<br>Obtendremos un punto por cada respuesta acertada y perderemos un punto por cada respuesta erronea.<br><br>Podemos escribir PASAPALABRA o teclear el ESPACIO para pasar a la siguiente pregunta<br><br>Si terminamos el juego antes de terminar la ronda no se registrará la puntuación en el ranking.</p>
+        <h3 class="clasificacion">Clasificción</h3>
+        <p id="clasificacion-text" class="clasificacion-text ds-none"></p>
         <div class="central-container">
-          <p class="questions">Questions</p>
-          <input class="answer" type="text" name="answer" id="answer" />
-          <input class="btn-confirmar" type="button" value="Confirmar" />
-          <input class="btn-pasapalabra" type="button" value="Pasapalabra" />
-          <p class="resultados">Resultados</p>
+          <p id="preguntas" class="preguntas"></p>
+          <input id="respuestas" class="respuestas ds-none" type="text" name="respuestas"/>
+          <input id="btn-confirmar" onClick="comprobar()" class="btn-confirmar ds-none" type="button" value="Confirmar" />
+          <input id="btn-pasapalabra" onClick="pasapalabra()" class="btn-pasapalabra ds-none" type="button" value="Pasapalabra" />
+          <p id="comprobacion" class="comprobacion"></p>
         </div>
-        <p class="timer">Tiempo</p>
-        <input class="btn-end" type="button" value="Terminar el Juego" />
-        <input class="btn-new-game" type="button" value="Nuevo Juego" />
 
-        <div class="circle A"><h2>A</h2></div>
-        <div class="circle B"><h2>B</h2></div>
-        <div class="circle C"><h2>C</h2></div>
-        <div class="circle D"><h2>D</h2></div>
-        <div class="circle E"><h2>E</h2></div>
-        <div class="circle F"><h2>F</h2></div>
-        <div class="circle G"><h2>G</h2></div>
-        <div class="circle H"><h2>H</h2></div>
-        <div class="circle I"><h2>I</h2></div>
-        <div class="circle J"><h2>J</h2></div>
-        <div class="circle K"><h2>K</h2></div>
-        <div class="circle L"><h2>L</h2></div>
-        <div class="circle M"><h2>M</h2></div>
-        <div class="circle N"><h2>N</h2></div>
-        <div class="circle Ñ"><h2>Ñ</h2></div>
-        <div class="circle O"><h2>O</h2></div>
-        <div class="circle P"><h2>P</h2></div>
-        <div class="circle Q"><h2>Q</h2></div>
-        <div class="circle R"><h2>R</h2></div>
-        <div class="circle S"><h2>S</h2></div>
-        <div class="circle T"><h2>T</h2></div>
-        <div class="circle U"><h2>U</h2></div>
-        <div class="circle V"><h2>V</h2></div>
-        <div class="circle W"><h2>W</h2></div>
-        <div class="circle X"><h2>X</h2></div>
-        <div class="circle Y"><h2>Y</h2></div>
-        <div class="circle Z"><h2>Z</h2></div>
+        <p id="resultados-text" class="resultados-text ds-none"></p>
+        <p class="tiempo">Tiempo</p>
+        <p id="tiempo-text" class="tiempo-text">120"</p>
+        <input disabled id="btn-terminar" onClick="end()" class="btn-terminar" type="button" value="Terminar el Juego" />
+        <input onClick="newGame()" class="btn-nuevo-juego" type="button" value="Nuevo Juego" />
+
+        <div id="a" class="circle A"><h2>A</h2></div>
+        <div id="b" class="circle B"><h2>B</h2></div>
+        <div id="c" class="circle C"><h2>C</h2></div>
+        <div id="d" class="circle D"><h2>D</h2></div>
+        <div id="e" class="circle E"><h2>E</h2></div>
+        <div id="f" class="circle F"><h2>F</h2></div>
+        <div id="g" class="circle G"><h2>G</h2></div>
+        <div id="h" class="circle H"><h2>H</h2></div>
+        <div id="i" class="circle I"><h2>I</h2></div>
+        <div id="j" class="circle J"><h2>J</h2></div>
+        <div id="k" class="circle K"><h2>K</h2></div>
+        <div id="l" class="circle L"><h2>L</h2></div>
+        <div id="m" class="circle M"><h2>M</h2></div>
+        <div id="n" class="circle N"><h2>N</h2></div>
+        <div id="ñ" class="circle Ñ"><h2>Ñ</h2></div>
+        <div id="o" class="circle O"><h2>O</h2></div>
+        <div id="p" class="circle P"><h2>P</h2></div>
+        <div id="q" class="circle Q"><h2>Q</h2></div>
+        <div id="r" class="circle R"><h2>R</h2></div>
+        <div id="s" class="circle S"><h2>S</h2></div>
+        <div id="t" class="circle T"><h2>T</h2></div>
+        <div id="u" class="circle U"><h2>U</h2></div>
+        <div id="v" class="circle V"><h2>V</h2></div>
+        <div id="w" class="circle W"><h2>W</h2></div>
+        <div id="x" class="circle X"><h2>X</h2></div>
+        <div id="y" class="circle Y"><h2>Y</h2></div>
+        <div id="z" class="circle Z"><h2>Z</h2></div>
       </div>
     </div>
 
-    <script type="text/javascript" src="mains.js"></script>
+    <script type="text/javascript" src="main.js"></script>
   </body>
 </html>

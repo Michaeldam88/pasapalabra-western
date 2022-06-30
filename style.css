@@ -134,8 +134,8 @@ table {
 
 .main-container {
   margin: auto;
-  height: 900px;
-  width: 900px;
+  height: 56rem;
+  width: 56rem;
   padding: 1rem;
   padding-top: 1.7rem;
   background-color: rgba(206, 147, 70, 0.637);
@@ -147,10 +147,11 @@ table {
   width: 53em;
   height: 53em;
   border-radius: 50%;
-  background-image: url(IMG/ruleta\ tambor.png);
+  background-image: url(IMG/ruleta\ tambor\ v2.png);
   background-position: center;
-  background-size: cover;
-  background-color: rgb(157, 166, 175);
+  background-repeat: no-repeat;
+  background-size: 56rem 56rem;
+  border: 1px solid rgb(85, 84, 84);
 }
 .circle {
   display: block;
@@ -158,18 +159,125 @@ table {
   border-radius: 50%;
   top: 50%;
   left: 50%;
-  width: 4em;
-  height: 4em;
-  margin: -2em;
-  background-image: url(IMG/Sb7mmRemMagG_edited\ small.jpg);
-  background-color: rgba(192, 194, 61, 0.829);
+  width: 3.8em;
+  height: 3.8em;
+  margin: -1.9em;
+  background-image: url(IMG/Sb7mmRemMagG_edited\ small\ v3.jpg);
+  background-position: center;
+  background-size: cover;
   text-align: center;
-  padding: 0.3rem;
+  color: aliceblue;
+  padding: 0.35rem;
+  z-index: 0;
 }
 
 .circle-container h2 {
-  font-size: 3.2rem;
+  font-size: 3rem;
   font-family: "Roboto", sans-serif;
+}
+
+.reglas {
+  font-size: 1.5rem;
+  display: block;
+  position: absolute;
+}
+
+.clasificacion {
+  font-size: 1.5rem;
+  display: block;
+  position: absolute;
+  right: 0;
+}
+
+.central-container {
+  width: 12.75rem;
+  height: 10rem;
+  display: block;
+  position: absolute;
+  top: 21rem;
+  left: 20rem;
+}
+
+.tiempo {
+  display: block;
+  position: absolute;
+  bottom: 2rem;
+}
+
+.tiempo-text {
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+
+.btn-terminar {
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.btn-nuevo-juego {
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 2rem;
+}
+
+.preguntas {
+  color: aliceblue;
+}
+
+
+
+.comprobacion {
+  color: aliceblue;
+}
+
+.__green {
+  border-bottom: #008000 3px solid;
+}
+
+.__yellow {
+  border-bottom: #e1d91a 3px solid;
+}
+
+.__red {
+  border-bottom: #800000 3px solid;
+}
+
+.reglas-text {
+  background-color: #e0ba89;
+  margin: auto;
+  width: 60%;
+  font-size: 1.2rem;
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.resultados-text {
+  background-color: #e0ba89;
+  margin: auto;
+  width: 60%;
+  font-size: 1.2rem;
+  font-family: "Roboto", sans-serif;  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.clasificacion-text{
+  background-color: #e0ba89;
+  margin: auto;
+  width: 60%;
+  font-size: 1.2rem;
+  font-family: "Roboto", sans-serif;  
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
 }
 
 .A {
@@ -256,16 +364,6 @@ table {
   transform: rotate(256.58deg) translate(24em) rotate(-256.58deg);
 }
 
-.rules{
-	font-size: 1.5rem;
-	display: block;
-    position: absolute;
-	
-}
-
-.ranking{
-	font-size: 1.5rem;
-	display: block;
-    position: absolute;
-    right: 0;
+.ds-none {
+  display: none;
 }
