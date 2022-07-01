@@ -144,8 +144,8 @@ table {
 .circle-container {
   margin: auto;
   position: relative;
-  width: 53em;
-  height: 53em;
+  width: 52.5em;
+  height: 52.5em;
   border-radius: 50%;
   background-image: url(IMG/ruleta\ tambor\ v2.png);
   background-position: center;
@@ -240,44 +240,47 @@ table {
 
 .__yellow {
   border-bottom: #e1d91a 3px solid;
+ 
 }
 
 .__red {
   border-bottom: #800000 3px solid;
 }
 
-.reglas-text {
-  background-color: #e0ba89;
-  margin: auto;
-  width: 60%;
+ .reglas-text {
+   top: 1.5rem;
+  left: 6.7rem;
+  background-color: #9c794b;
+  width: 53rem;
+  height: 53rem;
   font-size: 1.2rem;
   font-family: "Roboto", sans-serif;
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: fixed; 
+  z-index: 1;
 }
 
 .resultados-text {
-  background-color: #e0ba89;
-  margin: auto;
-  width: 60%;
+   top: 1.5rem;
+  left: 6.7rem;
+  background-color: #6d4614;
+  width: 53rem;
+  height: 53rem;
   font-size: 1.2rem;
-  font-family: "Roboto", sans-serif;  
-  position: absolute;
-  top: 50%;
-  left: 50%;
-}
+  font-family: "Roboto", sans-serif;
+  position: fixed; 
+  z-index: 1;
+} 
 
 .clasificacion-text{
-  background-color: #e0ba89;
-  margin: auto;
-  width: 60%;
+  top: 1.5rem;
+  left: 6.7rem;
+  background-color: #b47727;
+  width: 53rem;
+  height: 53rem;
   font-size: 1.2rem;
-  font-family: "Roboto", sans-serif;  
-  position: absolute;
-  top: 50%;
-  left: 50%;
-
+  font-family: "Roboto", sans-serif;
+  position: fixed; 
+  z-index: 1;
 }
 
 .A {

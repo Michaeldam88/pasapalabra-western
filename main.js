@@ -177,7 +177,7 @@ const questions = [
       status: 0,
       question:
         "CON LA Z. Escuela de budismo que busca la experiencia de la sabiduría más allá del discurso racional",
-    }
+    },
   ],
   [
     {
@@ -374,16 +374,20 @@ let aciertos,
   nPreg,
   pendientes,
   puntuacion = 0;
-let nombre, letter;
+let gameActive = false;
+let coverActive = false;
+let nombre, letter, tiempo, timer;
 let preguntas = document.getElementById("preguntas");
 let comprobacion = document.getElementById("comprobacion");
 let resultados_text = document.getElementById("resultados-text");
 let respuestas = document.getElementById("respuestas");
 let clasificacion_text = document.getElementById("clasificacion-text");
+let reglas_text = document.getElementById("reglas-text");
+let tiempo_text = document.getElementById("tiempo-text");
 const btn_confirmar = document.getElementById("btn-confirmar");
 const btn_pasapalabra = document.getElementById("btn-pasapalabra");
 const btn_terminar = document.getElementById("btn-terminar");
-const br = document.createElement("BR");
+const br = document.createElement("br");
 
 // valor que cambia el set de preguntas
 let sp = -1;
@@ -404,6 +408,7 @@ const newGame = () => {
   btn_pasapalabra.classList.remove("ds-none");
   btn_confirmar.classList.remove("ds-none");
   respuestas.classList.remove("ds-none");
+  gameActive = true;
   nPreg = 0;
   sp < questions.length - 1 ? sp++ : (sp = 0);
   questions[sp].forEach((element) => (element.status = 0));
@@ -411,8 +416,10 @@ const newGame = () => {
     let e = document.getElementById(element.letter);
     e.classList.remove("__yellow", "__red", "__green");
   });
-  setTimeout(timeLimit, 180000);
   nombre = prompt("Indique su nombre por favor");
+  tiempo = 180;
+  setTimeout(timeLimit, 180000);
+  timerUpdate();
   respuestas.focus();
   btn_terminar.disabled = false;
   preguntar();
@@ -424,6 +431,27 @@ const timeLimit = () => {
   btn_terminar.disabled = true;
   resultados_text.textContent = `¡ Se ha acabado el tiempo ! ${br} Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}${br}Tu Puntuación ha sido de ${puntuacion}`;
   resultados_text.classList.remove("ds-none");
+  tiempo_text.textContent = 0
+  gameActive = false;
+  ranking.push({ name: nombre, points: puntuacion });
+  const orderRanking = ranking.sort((a, b) => b.points - a.points);
+  const clasificacionOrdenada = orderRanking.reduce((acc, next) => {
+    return `${acc}${next.name}: ${next.points} Puntos${br}`;
+  }, `Ranking ${br}`);
+  clasificacion_text.textContent = clasificacionOrdenada;
+  setTimeout(function () {
+    (coverActive = true), 1000;
+  });
+  clearInterval(timer);
+};
+
+// actualizazion timer
+let timerUpdate = () => {
+  tiempo--;
+  timer = setInterval(function () {
+    tiempo_text.textContent = tiempo + '"';
+    tiempo--;
+  }, 1000);
 };
 
 //actualizar puntuación
@@ -439,6 +467,7 @@ const victoria = () => {
   actPuntos();
   if (questions[sp].every((element) => element.status > 1)) {
     reset();
+    gameActive = false;
     resultados_text.textContent = `¡ Has terminado ! ${br} Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}${br}Tu Puntuación ha sido de ${puntuacion}`;
     resultados_text.classList.remove("ds-none");
     ranking.push({ name: nombre, points: puntuacion });
@@ -446,11 +475,11 @@ const victoria = () => {
     const clasificacionOrdenada = orderRanking.reduce((acc, next) => {
       return `${acc}${next.name}: ${next.points} Puntos${br}`;
     }, `Ranking${br}`);
+
+    clasificacion_text.textContent = clasificacionOrdenada;
     setTimeout(function () {
-      resultados_text.classList.add("ds-none");
-      clasificacion_text.classList.remove("ds-none");
-      clasificacion_text.textContent = clasificacionOrdenada;
-    }, 8000);
+      (coverActive = true), 1000;
+    });
   } else {
     preguntar();
   }
@@ -458,7 +487,6 @@ const victoria = () => {
 
 //Comprobamos que pregunta tenemos que hacer
 const preguntar = () => {
-  console.log(nPreg)
   if (nPreg === questions[sp].length) {
     nPreg = 0;
   }
@@ -518,16 +546,47 @@ const end = () => {
   resultados_text.textContent = `¡ Gracias por participar !${br}Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}${br}Tu Puntuación ha sido de ${puntuacion}`;
   resultados_text.classList.remove("ds-none");
   btn_terminar.disabled = true;
+  gameActive = false;
+  setTimeout(function () {
+    (coverActive = true), 1000;
+  });
 };
 
 // activamos la funcionalidad del teclado
 const logKey = (e) => {
-  e = e.key;
-  if (e === "Space") {
-    pasapalabra();
-  } else if (e === "Enter") {
-    comprobar();
+  if (gameActive) {
+    e = e.key;
+    if (e === "Space") {
+      pasapalabra();
+    } else if (e === "Enter") {
+      comprobar();
+    }
+  }
+
+  if (coverActive) {
+    resultados_text.classList.add("ds-none");
+    clasificacion_text.classList.add("ds-none");
+    reglas_text.classList.add("ds-none");
+    coverActive = false;
   }
 };
 
+const logClick = () => {
+  if (coverActive) {
+    resultados_text.classList.add("ds-none");
+    clasificacion_text.classList.add("ds-none");
+    reglas_text.classList.add("ds-none");
+    coverActive = false;
+  }
+};
+
+document.addEventListener("click", logClick);
 document.addEventListener("keydown", logKey);
+
+//abrir reglas y clasificación
+const openTab = (element) => {
+  element.classList.remove("ds-none");
+  setTimeout(function () {
+    (coverActive = true), 1000;
+  });
+};
