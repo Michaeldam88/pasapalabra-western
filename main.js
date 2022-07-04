@@ -369,6 +369,35 @@ const questions = [
 ];
 
 const ranking = [];
+const positions = [
+  "transform: rotate(-90deg) translate(24em) rotate(90deg)",
+  "transform: rotate(-76.67deg) translate(24em) rotate(76.67deg)",
+  "transform: rotate(-63.34deg) translate(24em) rotate(63.34deg)",
+  "transform: rotate(-50.01deg) translate(24em) rotate(50.01deg)",
+  "transform: rotate(-36.68deg) translate(24em) rotate(36.68deg)",
+  "transform: rotate(-23.35deg) translate(24em) rotate(23.35deg)",
+  "transform: rotate(-10.02deg) translate(24em) rotate(10.02deg)",
+  "transform: rotate(3.3deg) translate(24em) rotate(-3.3deg)",
+  "transform: rotate(16.64deg) translate(24em) rotate(-16.64deg)",
+  "transform: rotate(29.97deg) translate(24em) rotate(-29.97deg)",
+  "transform: rotate(43.3deg) translate(24em) rotate(-43.3deg)",
+  "transform: rotate(56.63deg) translate(24em) rotate(-56.63deg)",
+  "transform: rotate(69.96deg) translate(24em) rotate(-69.96deg)",
+  "transform: rotate(83.29deg) translate(24em) rotate(-83.29deg)",
+  "transform: rotate(96.62deg) translate(24em) rotate(-96.62deg)",
+  "transform: rotate(109.95deg) translate(24em) rotate(-109.95deg)",
+  "transform: rotate(123.28deg) translate(24em) rotate(-123.28deg)",
+  "transform: rotate(136.61deg) translate(24em) rotate(-136.61deg)",
+  "transform: rotate(149.94deg) translate(24em) rotate(-149.94deg)",
+  "transform: rotate(163.27deg) translate(24em) rotate(-163.27deg)",
+  "transform: rotate(176.6deg) translate(24em) rotate(-176.6deg)",
+  "transform: rotate(189.93deg) translate(24em) rotate(-189.93deg)",
+  "transform: rotate(203.26deg) translate(24em) rotate(-203.26deg)",
+  "transform: rotate(216.59deg) translate(24em) rotate(-216.59deg)",
+  "transform: rotate(229.92deg) translate(24em) rotate(-229.92deg)",
+  "transform: rotate(243.25deg) translate(24em) rotate(-243.25deg)",
+  "transform: rotate(256.58deg) translate(24em) rotate(-256.58deg)",
+];
 let aciertos,
   errores,
   nPreg,
@@ -431,7 +460,7 @@ const timeLimit = () => {
   btn_terminar.disabled = true;
   resultados_text.textContent = `¡ Se ha acabado el tiempo ! ${br} Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}${br}Tu Puntuación ha sido de ${puntuacion}`;
   resultados_text.classList.remove("ds-none");
-  tiempo_text.textContent = 0
+  tiempo_text.textContent = 0;
   gameActive = false;
   ranking.push({ name: nombre, points: puntuacion });
   const orderRanking = ranking.sort((a, b) => b.points - a.points);
@@ -494,9 +523,24 @@ const preguntar = () => {
   if (questions[sp][nPreg].status < 2) {
     letter = document.getElementById(questions[sp][nPreg].letter);
     preguntas.textContent = questions[sp][nPreg].question;
+    moverLetras();
   } else {
     nPreg += 1;
     preguntar();
+  }
+};
+
+// mover letras
+const moverLetras = () => {
+  let num = 0;
+  let letterPosition = 27 - nPreg;
+  for (let i = 0; i < questions[sp].length; i++) {
+    if (letterPosition + i > 26) {
+      letterPosition = 0;
+      num = 0;
+    }
+    console.log(questions[sp][i].letter + (letterPosition + num));
+    num++;
   }
 };
 
