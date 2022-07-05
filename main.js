@@ -370,33 +370,33 @@ const questions = [
 
 const ranking = [];
 const positions = [
-  "transform: rotate(-90deg) translate(24em) rotate(90deg)",
-  "transform: rotate(-76.67deg) translate(24em) rotate(76.67deg)",
-  "transform: rotate(-63.34deg) translate(24em) rotate(63.34deg)",
-  "transform: rotate(-50.01deg) translate(24em) rotate(50.01deg)",
-  "transform: rotate(-36.68deg) translate(24em) rotate(36.68deg)",
-  "transform: rotate(-23.35deg) translate(24em) rotate(23.35deg)",
-  "transform: rotate(-10.02deg) translate(24em) rotate(10.02deg)",
-  "transform: rotate(3.3deg) translate(24em) rotate(-3.3deg)",
-  "transform: rotate(16.64deg) translate(24em) rotate(-16.64deg)",
-  "transform: rotate(29.97deg) translate(24em) rotate(-29.97deg)",
-  "transform: rotate(43.3deg) translate(24em) rotate(-43.3deg)",
-  "transform: rotate(56.63deg) translate(24em) rotate(-56.63deg)",
-  "transform: rotate(69.96deg) translate(24em) rotate(-69.96deg)",
-  "transform: rotate(83.29deg) translate(24em) rotate(-83.29deg)",
-  "transform: rotate(96.62deg) translate(24em) rotate(-96.62deg)",
-  "transform: rotate(109.95deg) translate(24em) rotate(-109.95deg)",
-  "transform: rotate(123.28deg) translate(24em) rotate(-123.28deg)",
-  "transform: rotate(136.61deg) translate(24em) rotate(-136.61deg)",
-  "transform: rotate(149.94deg) translate(24em) rotate(-149.94deg)",
-  "transform: rotate(163.27deg) translate(24em) rotate(-163.27deg)",
-  "transform: rotate(176.6deg) translate(24em) rotate(-176.6deg)",
-  "transform: rotate(189.93deg) translate(24em) rotate(-189.93deg)",
-  "transform: rotate(203.26deg) translate(24em) rotate(-203.26deg)",
-  "transform: rotate(216.59deg) translate(24em) rotate(-216.59deg)",
-  "transform: rotate(229.92deg) translate(24em) rotate(-229.92deg)",
-  "transform: rotate(243.25deg) translate(24em) rotate(-243.25deg)",
-  "transform: rotate(256.58deg) translate(24em) rotate(-256.58deg)",
+  "rotate(-90deg) translate(24em) rotate(90deg)",
+  "rotate(-76.67deg) translate(24em) rotate(76.67deg)",
+  "rotate(-63.34deg) translate(24em) rotate(63.34deg)",
+  "rotate(-50.01deg) translate(24em) rotate(50.01deg)",
+  "rotate(-36.68deg) translate(24em) rotate(36.68deg)",
+  "rotate(-23.35deg) translate(24em) rotate(23.35deg)",
+  "rotate(-10.02deg) translate(24em) rotate(10.02deg)",
+  "rotate(3.3deg) translate(24em) rotate(-3.3deg)",
+  "rotate(16.64deg) translate(24em) rotate(-16.64deg)",
+  "rotate(29.97deg) translate(24em) rotate(-29.97deg)",
+  "rotate(43.3deg) translate(24em) rotate(-43.3deg)",
+  "rotate(56.63deg) translate(24em) rotate(-56.63deg)",
+  "rotate(69.96deg) translate(24em) rotate(-69.96deg)",
+  "rotate(83.29deg) translate(24em) rotate(-83.29deg)",
+  "rotate(96.62deg) translate(24em) rotate(-96.62deg)",
+  "rotate(109.95deg) translate(24em) rotate(-109.95deg)",
+  "rotate(123.28deg) translate(24em) rotate(-123.28deg)",
+  "rotate(136.61deg) translate(24em) rotate(-136.61deg)",
+  "rotate(149.94deg) translate(24em) rotate(-149.94deg)",
+  "rotate(163.27deg) translate(24em) rotate(-163.27deg)",
+  "rotate(176.6deg) translate(24em) rotate(-176.6deg)",
+  "rotate(189.93deg) translate(24em) rotate(-189.93deg)",
+  "rotate(203.26deg) translate(24em) rotate(-203.26deg)",
+  "rotate(216.59deg) translate(24em) rotate(-216.59deg)",
+  "rotate(229.92deg) translate(24em) rotate(-229.92deg)",
+  "rotate(243.25deg) translate(24em) rotate(-243.25deg)",
+  "rotate(256.58deg) translate(24em) rotate(-256.58deg)",
 ];
 let aciertos,
   errores,
@@ -405,7 +405,7 @@ let aciertos,
   puntuacion = 0;
 let gameActive = false;
 let coverActive = false;
-let nombre, letter, tiempo, timer;
+let nombre, letter, tiempo, timer, timeout, rotation;
 let preguntas = document.getElementById("preguntas");
 let comprobacion = document.getElementById("comprobacion");
 let resultados_text = document.getElementById("resultados-text");
@@ -413,6 +413,7 @@ let respuestas = document.getElementById("respuestas");
 let clasificacion_text = document.getElementById("clasificacion-text");
 let reglas_text = document.getElementById("reglas-text");
 let tiempo_text = document.getElementById("tiempo-text");
+const root = document.querySelector(":root");
 const btn_confirmar = document.getElementById("btn-confirmar");
 const btn_pasapalabra = document.getElementById("btn-pasapalabra");
 const btn_terminar = document.getElementById("btn-terminar");
@@ -439,6 +440,7 @@ const newGame = () => {
   respuestas.classList.remove("ds-none");
   gameActive = true;
   nPreg = 0;
+  rotation = 13.3;
   sp < questions.length - 1 ? sp++ : (sp = 0);
   questions[sp].forEach((element) => (element.status = 0));
   questions[sp].forEach((element) => {
@@ -447,7 +449,7 @@ const newGame = () => {
   });
   nombre = prompt("Indique su nombre por favor");
   tiempo = 180;
-  setTimeout(timeLimit, 180000);
+  timeout = setTimeout(timeLimit, 180000);
   timerUpdate();
   respuestas.focus();
   btn_terminar.disabled = false;
@@ -500,6 +502,8 @@ const victoria = () => {
     resultados_text.textContent = `¡ Has terminado ! ${br} Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}${br}Tu Puntuación ha sido de ${puntuacion}`;
     resultados_text.classList.remove("ds-none");
     ranking.push({ name: nombre, points: puntuacion });
+    clearTimeout(timeout);
+    clearInterval(timer);
     const orderRanking = ranking.sort((a, b) => b.points - a.points);
     const clasificacionOrdenada = orderRanking.reduce((acc, next) => {
       return `${acc}${next.name}: ${next.points} Puntos${br}`;
@@ -516,6 +520,10 @@ const victoria = () => {
 
 //Comprobamos que pregunta tenemos que hacer
 const preguntar = () => {
+  root.style.setProperty(
+    "--pseudo-rotate",
+    "rotate(" + (rotation -= 13.3) + "deg)"
+  );
   if (nPreg === questions[sp].length) {
     nPreg = 0;
   }
@@ -539,7 +547,8 @@ const moverLetras = () => {
       letterPosition = 0;
       num = 0;
     }
-    console.log(questions[sp][i].letter + (letterPosition + num));
+    document.getElementById(questions[sp][i].letter).style.transform =
+      positions[letterPosition + num];
     num++;
   }
 };
@@ -569,6 +578,9 @@ const comprobar = () => {
       comprobacion.textContent =
         "Respuesta Incorrecta${br}La correcta era " +
         questions[sp][nPreg].answer;
+      setTimeout(function () {
+        comprobacion.textContent = "";
+      }, 1000);
       nPreg += 1;
       respuestas.value = "";
       victoria();
@@ -591,6 +603,8 @@ const end = () => {
   resultados_text.classList.remove("ds-none");
   btn_terminar.disabled = true;
   gameActive = false;
+  clearTimeout(timeout);
+  clearInterval(timer);
   setTimeout(function () {
     (coverActive = true), 1000;
   });

@@ -132,6 +132,10 @@ table {
   border-spacing: 0;
 }
 
+:root {
+  --pseudo-rotate: rotate(0deg);
+}
+
 .main-container {
   margin: auto;
   height: 56rem;
@@ -144,6 +148,14 @@ table {
 .circle-container {
   margin: auto;
   position: relative;
+  overflow: hidden;
+  width: 52.5em;
+  height: 52.5em;
+}
+
+.circle-container::before {
+  content: "";
+  position: absolute;
   width: 52.5em;
   height: 52.5em;
   border-radius: 50%;
@@ -152,7 +164,9 @@ table {
   background-repeat: no-repeat;
   background-size: 56rem 56rem;
   border: 1px solid rgb(85, 84, 84);
+  transform: var(--pseudo-rotate);
 }
+
 .circle {
   display: block;
   position: absolute;
@@ -182,11 +196,41 @@ table {
   position: absolute;
 }
 
+.reglas-text {
+  position: absolute;
+  background-color: #9c794b;
+  width: 53rem;
+  height: 53rem;
+  font-size: 1.2rem;
+  font-family: "Roboto", sans-serif;
+  z-index: 1;
+}
+
 .clasificacion {
   font-size: 1.5rem;
   display: block;
   position: absolute;
   right: 0;
+}
+
+.clasificacion-text {
+  position: absolute;
+  background-color: #b47727;
+  width: 53rem;
+  height: 53rem;
+  font-size: 1.2rem;
+  font-family: "Roboto", sans-serif;
+  z-index: 1;
+}
+
+.resultados-text {
+  position: absolute;
+  background-color: #6d4614;
+  width: 53rem;
+  height: 53rem;
+  font-size: 1.2rem;
+  font-family: "Roboto", sans-serif;
+  z-index: 1;
 }
 
 .central-container {
@@ -228,10 +272,19 @@ table {
   color: aliceblue;
 }
 
-
-
 .comprobacion {
   color: aliceblue;
+}
+
+.Ñ {
+  padding-top: 0.6rem;
+}
+.W {
+  padding-top: 0.5rem;
+}
+
+.ds-none {
+  display: none;
 }
 
 .__green {
@@ -240,133 +293,8 @@ table {
 
 .__yellow {
   border-bottom: #e1d91a 3px solid;
- 
 }
 
 .__red {
   border-bottom: #800000 3px solid;
-}
-
- .reglas-text {
-   top: 1.5rem;
-  left: 6.7rem;
-  background-color: #9c794b;
-  width: 53rem;
-  height: 53rem;
-  font-size: 1.2rem;
-  font-family: "Roboto", sans-serif;
-  position: fixed; 
-  z-index: 1;
-}
-
-.resultados-text {
-   top: 1.5rem;
-  left: 6.7rem;
-  background-color: #6d4614;
-  width: 53rem;
-  height: 53rem;
-  font-size: 1.2rem;
-  font-family: "Roboto", sans-serif;
-  position: fixed; 
-  z-index: 1;
-} 
-
-.clasificacion-text{
-  top: 1.5rem;
-  left: 6.7rem;
-  background-color: #b47727;
-  width: 53rem;
-  height: 53rem;
-  font-size: 1.2rem;
-  font-family: "Roboto", sans-serif;
-  position: fixed; 
-  z-index: 1;
-}
-
-.A {
-  transform: rotate(-90deg) translate(24em) rotate(90deg);
-}
-.B {
-  transform: rotate(-76.67deg) translate(24em) rotate(76.67deg);
-}
-.C {
-  transform: rotate(-63.34deg) translate(24em) rotate(63.34deg);
-}
-.D {
-  transform: rotate(-50.01deg) translate(24em) rotate(50.01deg);
-}
-.E {
-  transform: rotate(-36.68deg) translate(24em) rotate(36.68deg);
-}
-.F {
-  transform: rotate(-23.35deg) translate(24em) rotate(23.35deg);
-}
-.G {
-  transform: rotate(-10.02deg) translate(24em) rotate(10.02deg);
-}
-.H {
-  transform: rotate(3.3deg) translate(24em) rotate(-3.3deg);
-}
-.I {
-  transform: rotate(16.64deg) translate(24em) rotate(-16.64deg);
-}
-.J {
-  transform: rotate(29.97deg) translate(24em) rotate(-29.97deg);
-}
-.K {
-  transform: rotate(43.3deg) translate(24em) rotate(-43.3deg);
-}
-.L {
-  transform: rotate(56.63deg) translate(24em) rotate(-56.63deg);
-}
-.M {
-  transform: rotate(69.96deg) translate(24em) rotate(-69.96deg);
-}
-.N {
-  transform: rotate(83.29deg) translate(24em) rotate(-83.29deg);
-}
-.Ñ {
-  transform: rotate(96.62deg) translate(24em) rotate(-96.62deg);
-  padding-top: 0.6rem;
-}
-.O {
-  transform: rotate(109.95deg) translate(24em) rotate(-109.95deg);
-}
-.P {
-  transform: rotate(123.28deg) translate(24em) rotate(-123.28deg);
-}
-.Q {
-  transform: rotate(136.61deg) translate(24em) rotate(-136.61deg);
-}
-.R {
-  transform: rotate(149.94deg) translate(24em) rotate(-149.94deg);
-}
-.S {
-  transform: rotate(163.27deg) translate(24em) rotate(-163.27deg);
-}
-.T {
-  transform: rotate(176.6deg) translate(24em) rotate(-176.6deg);
-}
-.U {
-  transform: rotate(189.93deg) translate(24em) rotate(-189.93deg);
-}
-.V {
-  transform: rotate(203.26deg) translate(24em) rotate(-203.26deg);
-}
-.W {
-  transform: rotate(216.59deg) translate(24em) rotate(-216.59deg);
-  padding-top: 0.5rem;
-}
-.X {
-  transform: rotate(229.92deg) translate(24em) rotate(-229.92deg);
-}
-.Y {
-  transform: rotate(243.25deg) translate(24em) rotate(-243.25deg);
-}
-.Z {
-  transform: rotate(256.58deg) translate(24em) rotate(-256.58deg);
-}
-
-.ds-none {
-  display: none;
 }
