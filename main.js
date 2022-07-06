@@ -177,7 +177,7 @@ const questions = [
       status: 0,
       question:
         "CON LA Z. Escuela de budismo que busca la experiencia de la sabiduría más allá del discurso racional",
-    },
+    }
   ],
   [
     {
@@ -357,15 +357,8 @@ const questions = [
       status: 0,
       question:
         "CON LA Z. Sonido que producen algunos insectos como la abeja o el mosquito",
-    },
-    {
-      letter: "a",
-      answer: "abducir",
-      status: 0,
-      question:
-        "CON LA A. Dicho de una supuesta criatura extraterrestre: Apoderarse de alguien",
-    },
-  ],
+    }
+  ]
 ];
 
 const ranking = [];
@@ -540,6 +533,7 @@ const preguntar = () => {
 
 // mover letras
 const moverLetras = () => {
+  console.log(questions[sp].length)
   let num = 0;
   let letterPosition = 27 - nPreg;
   for (let i = 0; i < questions[sp].length; i++) {
@@ -580,7 +574,7 @@ const comprobar = () => {
         questions[sp][nPreg].answer;
       setTimeout(function () {
         comprobacion.textContent = "";
-      }, 1000);
+      }, 1500);
       nPreg += 1;
       respuestas.value = "";
       victoria();
