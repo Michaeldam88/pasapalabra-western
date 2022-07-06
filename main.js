@@ -410,7 +410,6 @@ const root = document.querySelector(":root");
 const btn_confirmar = document.getElementById("btn-confirmar");
 const btn_pasapalabra = document.getElementById("btn-pasapalabra");
 const btn_terminar = document.getElementById("btn-terminar");
-const br = document.createElement("br");
 
 // valor que cambia el set de preguntas
 let sp = -1;
@@ -453,16 +452,16 @@ const newGame = () => {
 const timeLimit = () => {
   reset();
   btn_terminar.disabled = true;
-  resultados_text.textContent = `¡ Se ha acabado el tiempo ! ${br} Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}${br}Tu Puntuación ha sido de ${puntuacion}`;
+  resultados_text.innerHTML = `¡ Se ha acabado el tiempo ! <br> Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}<br>Tu Puntuación ha sido de ${puntuacion}`;
   resultados_text.classList.remove("ds-none");
   tiempo_text.textContent = 0;
   gameActive = false;
   ranking.push({ name: nombre, points: puntuacion });
   const orderRanking = ranking.sort((a, b) => b.points - a.points);
   const clasificacionOrdenada = orderRanking.reduce((acc, next) => {
-    return `${acc}${next.name}: ${next.points} Puntos${br}`;
-  }, `Ranking ${br}`);
-  clasificacion_text.textContent = clasificacionOrdenada;
+    return `${acc}${next.name}: ${next.points} Puntos<br>`;
+  }, `Ranking <br>`);
+  clasificacion_text.innerHTML = clasificacionOrdenada;
   setTimeout(function () {
     (coverActive = true), 1000;
   });
@@ -492,17 +491,17 @@ const victoria = () => {
   if (questions[sp].every((element) => element.status > 1)) {
     reset();
     gameActive = false;
-    resultados_text.textContent = `¡ Has terminado ! ${br} Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}${br}Tu Puntuación ha sido de ${puntuacion}`;
+    resultados_text.innerHTML = `¡ Has terminado ! <br> Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}<br>Tu Puntuación ha sido de ${puntuacion}`;
     resultados_text.classList.remove("ds-none");
     ranking.push({ name: nombre, points: puntuacion });
     clearTimeout(timeout);
     clearInterval(timer);
     const orderRanking = ranking.sort((a, b) => b.points - a.points);
     const clasificacionOrdenada = orderRanking.reduce((acc, next) => {
-      return `${acc}${next.name}: ${next.points} Puntos${br}`;
-    }, `Ranking${br}`);
+      return `${acc}${next.name}: ${next.points} Puntos<br>`;
+    }, `Ranking<br>`);
 
-    clasificacion_text.textContent = clasificacionOrdenada;
+    clasificacion_text.innerHTML = clasificacionOrdenada;
     setTimeout(function () {
       (coverActive = true), 1000;
     });
@@ -532,8 +531,7 @@ const preguntar = () => {
 };
 
 // mover letras
-const moverLetras = () => {
-  console.log(questions[sp].length)
+const moverLetras = () => {  
   let num = 0;
   let letterPosition = 27 - nPreg;
   for (let i = 0; i < questions[sp].length; i++) {
@@ -569,8 +567,8 @@ const comprobar = () => {
       questions[sp][nPreg].status = 3;
       letter.classList.remove("__yellow");
       letter.classList.add("__red");
-      comprobacion.textContent =
-        "Respuesta Incorrecta${br}La correcta era " +
+      comprobacion.innerHTML =
+        "Respuesta Incorrecta<br>La correcta era " +
         questions[sp][nPreg].answer;
       setTimeout(function () {
         comprobacion.textContent = "";
@@ -593,7 +591,7 @@ const pasapalabra = () => {
 //terminar el juego con antelación
 const end = () => {
   reset();
-  resultados_text.textContent = `¡ Gracias por participar !${br}Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}${br}Tu Puntuación ha sido de ${puntuacion}`;
+  resultados_text.innerHTML = `¡ Gracias por participar ! <br> Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}<br>Tu Puntuación ha sido de ${puntuacion}`;
   resultados_text.classList.remove("ds-none");
   btn_terminar.disabled = true;
   gameActive = false;
