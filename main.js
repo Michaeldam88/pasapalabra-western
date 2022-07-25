@@ -177,7 +177,7 @@ const questions = [
       status: 0,
       question:
         "CON LA Z. Escuela de budismo que busca la experiencia de la sabiduría más allá del discurso racional",
-    }
+    },
   ],
   [
     {
@@ -357,39 +357,39 @@ const questions = [
       status: 0,
       question:
         "CON LA Z. Sonido que producen algunos insectos como la abeja o el mosquito",
-    }
-  ]
+    },
+  ],
 ];
 
 const ranking = [];
 const positions = [
-  "rotate(-90deg) translate(24em) rotate(90deg)",
-  "rotate(-76.67deg) translate(24em) rotate(76.67deg)",
-  "rotate(-63.34deg) translate(24em) rotate(63.34deg)",
-  "rotate(-50.01deg) translate(24em) rotate(50.01deg)",
-  "rotate(-36.68deg) translate(24em) rotate(36.68deg)",
-  "rotate(-23.35deg) translate(24em) rotate(23.35deg)",
-  "rotate(-10.02deg) translate(24em) rotate(10.02deg)",
-  "rotate(3.3deg) translate(24em) rotate(-3.3deg)",
-  "rotate(16.64deg) translate(24em) rotate(-16.64deg)",
-  "rotate(29.97deg) translate(24em) rotate(-29.97deg)",
-  "rotate(43.3deg) translate(24em) rotate(-43.3deg)",
-  "rotate(56.63deg) translate(24em) rotate(-56.63deg)",
-  "rotate(69.96deg) translate(24em) rotate(-69.96deg)",
-  "rotate(83.29deg) translate(24em) rotate(-83.29deg)",
-  "rotate(96.62deg) translate(24em) rotate(-96.62deg)",
-  "rotate(109.95deg) translate(24em) rotate(-109.95deg)",
-  "rotate(123.28deg) translate(24em) rotate(-123.28deg)",
-  "rotate(136.61deg) translate(24em) rotate(-136.61deg)",
-  "rotate(149.94deg) translate(24em) rotate(-149.94deg)",
-  "rotate(163.27deg) translate(24em) rotate(-163.27deg)",
-  "rotate(176.6deg) translate(24em) rotate(-176.6deg)",
-  "rotate(189.93deg) translate(24em) rotate(-189.93deg)",
-  "rotate(203.26deg) translate(24em) rotate(-203.26deg)",
-  "rotate(216.59deg) translate(24em) rotate(-216.59deg)",
-  "rotate(229.92deg) translate(24em) rotate(-229.92deg)",
-  "rotate(243.25deg) translate(24em) rotate(-243.25deg)",
-  "rotate(256.58deg) translate(24em) rotate(-256.58deg)",
+  "rotate(-90deg) translate(20.47rem) rotate(90deg)",
+  "rotate(-76.67deg) translate(20.47rem) rotate(76.67deg)",
+  "rotate(-63.34deg) translate(20.47rem) rotate(63.34deg)",
+  "rotate(-50.01deg) translate(20.47rem) rotate(50.01deg)",
+  "rotate(-36.68deg) translate(20.47rem) rotate(36.68deg)",
+  "rotate(-23.35deg) translate(20.47rem) rotate(23.35deg)",
+  "rotate(-10.02deg) translate(20.47rem) rotate(10.02deg)",
+  "rotate(3.3deg) translate(20.47rem) rotate(-3.3deg)",
+  "rotate(16.64deg) translate(20.47rem) rotate(-16.64deg)",
+  "rotate(29.97deg) translate(20.47rem) rotate(-29.97deg)",
+  "rotate(43.3deg) translate(20.47rem) rotate(-43.3deg)",
+  "rotate(56.63deg) translate(20.47rem) rotate(-56.63deg)",
+  "rotate(69.96deg) translate(20.47rem) rotate(-69.96deg)",
+  "rotate(83.29deg) translate(20.47rem) rotate(-83.29deg)",
+  "rotate(96.62deg) translate(20.47rem) rotate(-96.62deg)",
+  "rotate(109.95deg) translate(20.47rem) rotate(-109.95deg)",
+  "rotate(123.28deg) translate(20.47rem) rotate(-123.28deg)",
+  "rotate(136.61deg) translate(20.47rem) rotate(-136.61deg)",
+  "rotate(149.94deg) translate(20.47rem) rotate(-149.94deg)",
+  "rotate(163.27deg) translate(20.47rem) rotate(-163.27deg)",
+  "rotate(176.6deg) translate(20.47rem) rotate(-176.6deg)",
+  "rotate(189.93deg) translate(20.47rem) rotate(-189.93deg)",
+  "rotate(203.26deg) translate(20.47rem) rotate(-203.26deg)",
+  "rotate(216.59deg) translate(20.47rem) rotate(-216.59deg)",
+  "rotate(229.92deg) translate(20.47rem) rotate(-229.92deg)",
+  "rotate(243.25deg) translate(20.47rem) rotate(-243.25deg)",
+  "rotate(256.58deg) translate(20.47rem) rotate(-256.58deg)",
 ];
 let aciertos,
   errores,
@@ -514,7 +514,7 @@ const victoria = () => {
 const preguntar = () => {
   root.style.setProperty(
     "--pseudo-rotate",
-    "rotate(" + (rotation -= 13.3) + "deg)"
+    "rotate(" + (rotation -= 360 / 27) + "deg)"
   );
   if (nPreg === questions[sp].length) {
     nPreg = 0;
@@ -531,7 +531,7 @@ const preguntar = () => {
 };
 
 // mover letras
-const moverLetras = () => {  
+const moverLetras = () => {
   let num = 0;
   let letterPosition = 27 - nPreg;
   for (let i = 0; i < questions[sp].length; i++) {
@@ -539,8 +539,15 @@ const moverLetras = () => {
       letterPosition = 0;
       num = 0;
     }
-    document.getElementById(questions[sp][i].letter).style.transform =
-      positions[letterPosition + num];
+
+    const initialRotation = 90;
+
+    const rotation =
+      -num * (360 / 27) - letterPosition * (360 / 27) + initialRotation;
+
+    document.getElementById(
+      questions[sp][i].letter
+    ).style.transform = `rotate(${-rotation}deg) translate(21.1rem) rotate(${rotation}deg)`;
     num++;
   }
 };
