@@ -1,7 +1,7 @@
 /* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+    v2.0 | 20110126
+    License: none (public domain)
+  */
 
 * {
   box-sizing: border-box;
@@ -193,15 +193,12 @@ body {
 }
 
 .circle {
-  display: block;
   position: absolute;
   border-radius: 50%;
   top: calc(50% - 1.6rem);
   left: calc(50% - 1.6rem);
   width: 3.2rem;
   height: 3.2rem;
-  /* margin: -1.48rem; */
-
   background-position: center;
   background-size: cover;
   text-align: center;
@@ -217,59 +214,77 @@ body {
   font-size: 22px;
 }
 
-.reglas {
+.rules {
   display: block;
   position: absolute;
   top: 4rem;
   left: 4rem;
 }
 
-.reglas-text {
+.rules-text {
+  width: 100%;
+  height: 100%;
   position: absolute;
-  background-color: #9c794b;
-  width: 53rem;
-  height: 53rem;
+  top: 0;
+  left: 0;
+  background-image: url("./IMG/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
   font-size: 1.2rem;
   z-index: 1;
+  text-align: center;
+  padding: 4rem;
 }
 
-.clasificacion {
+.ranking {
   display: block;
   position: absolute;
   top: 4rem;
   right: 4rem;
 }
 
-.clasificacion-text {
+.ranking-text {
+  width: 100%;
+  height: 100%;
   position: absolute;
-  background-color: #b47727;
-  width: 53rem;
-  height: 53rem;
+  top: 0;
+  left: 0;
+  background-image: url("./IMG/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
   font-size: 1.2rem;
-  font-family: "Roboto", sans-serif;
   z-index: 1;
+  text-align: center;
+  padding: 4rem;
 }
 
-.resultados-text {
+.result-text {
+  width: 100%;
+  height: 100%;
   position: absolute;
-  background-color: #6d4614;
-  width: 53rem;
-  height: 53rem;
+  top: 0;
+  left: 0;
+  background-image: url("./IMG/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
   font-size: 1.2rem;
-  font-family: "Roboto", sans-serif;
   z-index: 1;
+  text-align: center;
+  padding: 4rem;
 }
 
 .central-container {
-  width: 12rem;
-  height: 10rem;
-  display: block;
+  width: 20rem;
+  height: 20rem;
   position: absolute;
-  top: calc(50% - 6rem);
-  left: calc(50% - 5rem);
+  top: calc(50% - 10rem);
+  left: calc(50% - 10rem);
+  background-image: url("./IMG/estrella\ 2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.tiempo-cont {
+.time-cont {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -285,11 +300,11 @@ body {
   flex-direction: column;
 }
 
-.preguntas {
+.questions {
   color: aliceblue;
 }
 
-.comprobacion {
+.check-text {
   color: aliceblue;
 }
 

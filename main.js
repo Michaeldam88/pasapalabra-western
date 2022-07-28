@@ -1,4 +1,4 @@
-const questions = [
+const questionsArr = [
   [
     {
       letter: "a",
@@ -362,106 +362,80 @@ const questions = [
 ];
 
 const ranking = [];
-const positions = [
-  "rotate(-90deg) translate(20.47rem) rotate(90deg)",
-  "rotate(-76.67deg) translate(20.47rem) rotate(76.67deg)",
-  "rotate(-63.34deg) translate(20.47rem) rotate(63.34deg)",
-  "rotate(-50.01deg) translate(20.47rem) rotate(50.01deg)",
-  "rotate(-36.68deg) translate(20.47rem) rotate(36.68deg)",
-  "rotate(-23.35deg) translate(20.47rem) rotate(23.35deg)",
-  "rotate(-10.02deg) translate(20.47rem) rotate(10.02deg)",
-  "rotate(3.3deg) translate(20.47rem) rotate(-3.3deg)",
-  "rotate(16.64deg) translate(20.47rem) rotate(-16.64deg)",
-  "rotate(29.97deg) translate(20.47rem) rotate(-29.97deg)",
-  "rotate(43.3deg) translate(20.47rem) rotate(-43.3deg)",
-  "rotate(56.63deg) translate(20.47rem) rotate(-56.63deg)",
-  "rotate(69.96deg) translate(20.47rem) rotate(-69.96deg)",
-  "rotate(83.29deg) translate(20.47rem) rotate(-83.29deg)",
-  "rotate(96.62deg) translate(20.47rem) rotate(-96.62deg)",
-  "rotate(109.95deg) translate(20.47rem) rotate(-109.95deg)",
-  "rotate(123.28deg) translate(20.47rem) rotate(-123.28deg)",
-  "rotate(136.61deg) translate(20.47rem) rotate(-136.61deg)",
-  "rotate(149.94deg) translate(20.47rem) rotate(-149.94deg)",
-  "rotate(163.27deg) translate(20.47rem) rotate(-163.27deg)",
-  "rotate(176.6deg) translate(20.47rem) rotate(-176.6deg)",
-  "rotate(189.93deg) translate(20.47rem) rotate(-189.93deg)",
-  "rotate(203.26deg) translate(20.47rem) rotate(-203.26deg)",
-  "rotate(216.59deg) translate(20.47rem) rotate(-216.59deg)",
-  "rotate(229.92deg) translate(20.47rem) rotate(-229.92deg)",
-  "rotate(243.25deg) translate(20.47rem) rotate(-243.25deg)",
-  "rotate(256.58deg) translate(20.47rem) rotate(-256.58deg)",
-];
-let aciertos,
-  errores,
-  nPreg,
-  pendientes,
-  puntuacion = 0;
+
+let correctAnswer,
+  wrongAnswer,
+  questionN,
+  pendingQuestion,
+  score = 0;
 let gameActive = false;
 let coverActive = false;
-let nombre, letter, tiempo, timer, timeout, rotation;
-let preguntas = document.getElementById("preguntas");
-let comprobacion = document.getElementById("comprobacion");
-let resultados_text = document.getElementById("resultados-text");
-let respuestas = document.getElementById("respuestas");
-let clasificacion_text = document.getElementById("clasificacion-text");
-let reglas_text = document.getElementById("reglas-text");
-let tiempo_text = document.getElementById("tiempo-text");
+let userName, letter, time, timer, timeout, rotation;
+
+let questions = document.getElementById("questions");
+let check_text = document.getElementById("check-text");
+let result_text = document.getElementById("result-text");
+let userAnswer = document.getElementById("userAnswer");
+let ranking_text = document.getElementById("ranking-text");
+let rules_text = document.getElementById("rules-text");
+let time_text = document.getElementById("time-text");
 const root = document.querySelector(":root");
-const btn_confirmar = document.getElementById("btn-confirmar");
+const btn_confirm = document.getElementById("btn-confirm");
 const btn_pasapalabra = document.getElementById("btn-pasapalabra");
-const btn_terminar = document.getElementById("btn-terminar");
+const btn_end = document.getElementById("btn-end");
 
 // valor que cambia el set de preguntas
-let sp = -1;
+let gameNumber = -1;
 
 // resetear todo
 const reset = () => {
-  comprobacion.textContent = "";
-  respuestas.value = "";
-  preguntas.textContent = "";
+  check_text.textContent = "";
+  userAnswer.value = "";
+  questions.textContent = "";
   btn_pasapalabra.classList.add("ds-none");
-  btn_confirmar.classList.add("ds-none");
-  respuestas.classList.add("ds-none");
+  btn_confirm.classList.add("ds-none");
+  userAnswer.classList.add("ds-none");  
 };
 
 //nuevo Juego
 const newGame = () => {
   //preguntamos y guardamos el nombre
   btn_pasapalabra.classList.remove("ds-none");
-  btn_confirmar.classList.remove("ds-none");
-  respuestas.classList.remove("ds-none");
+  btn_confirm.classList.remove("ds-none");
+  userAnswer.classList.remove("ds-none");
   gameActive = true;
-  nPreg = 0;
+  questionN = 0;
   rotation = 13.3;
-  sp < questions.length - 1 ? sp++ : (sp = 0);
-  questions[sp].forEach((element) => (element.status = 0));
-  questions[sp].forEach((element) => {
+  gameNumber < questionsArr.length - 1 ? gameNumber++ : (gameNumber = 0);
+  questionsArr[gameNumber].forEach((element) => (element.status = 0));
+  questionsArr[gameNumber].forEach((element) => {
     let e = document.getElementById(element.letter);
     e.classList.remove("__yellow", "__red", "__green");
   });
-  nombre = prompt("Indique su nombre por favor");
-  tiempo = 180;
+  userName = prompt("Indique su nombre por favor");
+  time = 180;
   timeout = setTimeout(timeLimit, 180000);
   timerUpdate();
-  respuestas.focus();
-  btn_terminar.disabled = false;
-  preguntar();
+  userAnswer.focus();
+  btn_end.disabled = false;
+  scoreUpdate();
+  newQuestion();  
 };
 
 //limite de tiempo
 const timeLimit = () => {
   reset();
-  btn_terminar.disabled = true;
-  resultados_text.innerHTML = `¡ Se ha acabado el tiempo ! <br> Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}<br>Tu Puntuación ha sido de ${puntuacion}`;
-  resultados_text.classList.remove("ds-none");
-  tiempo_text.textContent = 0;
+  btn_end.disabled = true;
+  result_text.innerHTML = `¡ Se ha acabado el tiempo ! <br><br> Preguntas acertadas ${correctAnswer}, equivocadas ${wrongAnswer}, sin responder ${pendingQuestion}<br><br>Tu Puntuación ha sido de ${score}`;
+  result_text.classList.remove("ds-none");
+  time_text.textContent = 0;
   gameActive = false;
-  ranking.push({ name: nombre, points: puntuacion });
+  ranking.push({ userName: userName, points: score });
   const orderRanking = ranking.sort((a, b) => b.points - a.points);
-  const clasificacionOrdenada = orderRanking.reduce((acc, next) => {
-    return `${acc}${next.name}: ${next.points} Puntos<br>`;
-  }, `Ranking <br>`);
-  clasificacion_text.innerHTML = clasificacionOrdenada;
+  const showOrderRanking = orderRanking.reduce((acc, next) => {
+    return `${acc}${next.userName}: ${next.points} Puntos<br><br>`;
+  }, `Ranking <br><br><br>`);
+  ranking_text.innerHTML = showOrderRanking;
   setTimeout(function () {
     (coverActive = true), 1000;
   });
@@ -470,71 +444,74 @@ const timeLimit = () => {
 
 // actualizazion timer
 let timerUpdate = () => {
-  tiempo--;
+  time--;
   timer = setInterval(function () {
-    tiempo_text.textContent = tiempo + '"';
-    tiempo--;
+    time_text.textContent = time + '"';
+    time--;
   }, 1000);
 };
 
 //actualizar puntuación
-const actPuntos = () => {
-  aciertos = questions[sp].filter((x) => x.status === 2).length;
-  errores = questions[sp].filter((y) => y.status === 3).length;
-  pendientes = questions[sp].filter((w) => w.status < 2).length;
-  puntuacion = aciertos - errores;
+const scoreUpdate = () => {
+  correctAnswer = questionsArr[gameNumber].filter((x) => x.status === 2).length;
+  wrongAnswer = questionsArr[gameNumber].filter((y) => y.status === 3).length;
+  pendingQuestion = questionsArr[gameNumber].filter((w) => w.status < 2).length;
+  score = correctAnswer - wrongAnswer;
 };
 
 //Comprobamos si ha ganado
-const victoria = () => {
-  actPuntos();
-  if (questions[sp].every((element) => element.status > 1)) {
+const checkVictory = () => {
+  scoreUpdate();
+  if (questionsArr[gameNumber].every((element) => element.status > 1)) {
     reset();
     gameActive = false;
-    resultados_text.innerHTML = `¡ Has terminado ! <br> Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}<br>Tu Puntuación ha sido de ${puntuacion}`;
-    resultados_text.classList.remove("ds-none");
-    ranking.push({ name: nombre, points: puntuacion });
+    result_text.innerHTML = `¡ Has terminado ! <br><br> Preguntas acertadas ${correctAnswer}, equivocadas ${wrongAnswer}, sin responder ${pendingQuestion}<br><br>Tu Puntuación ha sido de ${score}`;
+    result_text.classList.remove("ds-none");
+    ranking.push({ userName: userName, points: score });
     clearTimeout(timeout);
     clearInterval(timer);
     const orderRanking = ranking.sort((a, b) => b.points - a.points);
-    const clasificacionOrdenada = orderRanking.reduce((acc, next) => {
-      return `${acc}${next.name}: ${next.points} Puntos<br>`;
-    }, `Ranking<br>`);
+    const showOrderRanking = orderRanking.reduce((acc, next) => {
+      return `${acc}${next.userName}: ${next.points} Puntos<br><br>`;
+    }, `Ranking <br><br><br>`);
 
-    clasificacion_text.innerHTML = clasificacionOrdenada;
+    ranking_text.innerHTML = showOrderRanking;
     setTimeout(function () {
       (coverActive = true), 1000;
     });
   } else {
-    preguntar();
+    newQuestion();
   }
 };
 
 //Comprobamos que pregunta tenemos que hacer
-const preguntar = () => {
+const newQuestion = () => {
+  userAnswer.focus();
   root.style.setProperty(
     "--pseudo-rotate",
     "rotate(" + (rotation -= 360 / 27) + "deg)"
   );
-  if (nPreg === questions[sp].length) {
-    nPreg = 0;
+  if (questionN === questionsArr[gameNumber].length) {
+    questionN = 0;
   }
 
-  if (questions[sp][nPreg].status < 2) {
-    letter = document.getElementById(questions[sp][nPreg].letter);
-    preguntas.textContent = questions[sp][nPreg].question;
-    moverLetras();
+  if (questionsArr[gameNumber][questionN].status < 2) {
+    letter = document.getElementById(
+      questionsArr[gameNumber][questionN].letter
+    );
+    questions.textContent = questionsArr[gameNumber][questionN].question;
+    moveLetters();
   } else {
-    nPreg += 1;
-    preguntar();
+    questionN += 1;
+    newQuestion();
   }
 };
 
 // mover letras
-const moverLetras = () => {
+const moveLetters = () => {
   let num = 0;
-  let letterPosition = 27 - nPreg;
-  for (let i = 0; i < questions[sp].length; i++) {
+  let letterPosition = 27 - questionN;
+  for (let i = 0; i < questionsArr[gameNumber].length; i++) {
     if (letterPosition + i > 26) {
       letterPosition = 0;
       num = 0;
@@ -546,23 +523,23 @@ const moverLetras = () => {
       -num * (360 / 27) - letterPosition * (360 / 27) + initialRotation;
 
     document.getElementById(
-      questions[sp][i].letter
+      questionsArr[gameNumber][i].letter
     ).style.transform = `rotate(${-rotation}deg) translate(21.1rem) rotate(${rotation}deg)`;
     num++;
   }
 };
 
 //Preguntamos y comprobamos la respuesta que ha dado es usuario
-const comprobar = () => {
-  texto_respuestas = respuestas.value.toLowerCase();
-  switch (texto_respuestas) {
-    case questions[sp][nPreg].answer:
-      questions[sp][nPreg].status = 2;
-      nPreg += 1;
+const checkAnswer = () => {
+  texto_userAnswer = userAnswer.value.toLowerCase();
+  switch (texto_userAnswer) {
+    case questionsArr[gameNumber][questionN].answer:
+      questionsArr[gameNumber][questionN].status = 2;
+      questionN += 1;
       letter.classList.remove("__yellow");
       letter.classList.add("__green");
-      respuestas.value = "";
-      victoria();
+      userAnswer.value = "";
+      checkVictory();
       break;
 
     case "pasapalabra":
@@ -571,36 +548,36 @@ const comprobar = () => {
       break;
 
     default:
-      questions[sp][nPreg].status = 3;
+      questionsArr[gameNumber][questionN].status = 3;
       letter.classList.remove("__yellow");
       letter.classList.add("__red");
-      comprobacion.innerHTML =
+      check_text.innerHTML =
         "Respuesta Incorrecta<br>La correcta era " +
-        questions[sp][nPreg].answer;
+        questionsArr[gameNumber][questionN].answer;
       setTimeout(function () {
-        comprobacion.textContent = "";
+        check_text.textContent = "";
       }, 1500);
-      nPreg += 1;
-      respuestas.value = "";
-      victoria();
+      questionN += 1;
+      userAnswer.value = "";
+      checkVictory();
   }
 };
 
 //boton pasapalabra
 const pasapalabra = () => {
-  questions[sp][nPreg].status = 1;
+  questionsArr[gameNumber][questionN].status = 1;
   letter.classList.add("__yellow");
-  nPreg += 1;
-  respuestas.value = "";
-  preguntar();
+  questionN += 1;
+  userAnswer.value = "";
+  newQuestion();
 };
 
 //terminar el juego con antelación
 const end = () => {
   reset();
-  resultados_text.innerHTML = `¡ Gracias por participar ! <br> Preguntas acertadas ${aciertos}, equivocadas ${errores}, sin responder ${pendientes}<br>Tu Puntuación ha sido de ${puntuacion}`;
-  resultados_text.classList.remove("ds-none");
-  btn_terminar.disabled = true;
+  result_text.innerHTML = `¡ Gracias por participar ! <br><br> Preguntas acertadas ${correctAnswer}, equivocadas ${wrongAnswer}, sin responder ${pendingQuestion}<br><br>Tu Puntuación ha sido de ${score}`;
+  result_text.classList.remove("ds-none");
+  btn_end.disabled = true;
   gameActive = false;
   clearTimeout(timeout);
   clearInterval(timer);
@@ -616,23 +593,23 @@ const logKey = (e) => {
     if (e === "Space") {
       pasapalabra();
     } else if (e === "Enter") {
-      comprobar();
+      checkAnswer();
     }
   }
 
   if (coverActive) {
-    resultados_text.classList.add("ds-none");
-    clasificacion_text.classList.add("ds-none");
-    reglas_text.classList.add("ds-none");
+    result_text.classList.add("ds-none");
+    ranking_text.classList.add("ds-none");
+    rules_text.classList.add("ds-none");
     coverActive = false;
   }
 };
 
 const logClick = () => {
   if (coverActive) {
-    resultados_text.classList.add("ds-none");
-    clasificacion_text.classList.add("ds-none");
-    reglas_text.classList.add("ds-none");
+    result_text.classList.add("ds-none");
+    ranking_text.classList.add("ds-none");
+    rules_text.classList.add("ds-none");
     coverActive = false;
   }
 };
