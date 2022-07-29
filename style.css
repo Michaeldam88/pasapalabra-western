@@ -278,8 +278,7 @@ body {
   height: 20rem;
   position: absolute;
   top: calc(50% - 10rem);
-  left: calc(50% - 10rem);
-  background-image: url("./IMG/estrella\ 2.png");
+  left: calc(50% - 10rem);3666
   background-size: cover;
   background-repeat: no-repeat;
 }
