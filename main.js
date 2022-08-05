@@ -379,10 +379,12 @@ let userAnswer = document.getElementById("userAnswer");
 let ranking_text = document.getElementById("ranking-text");
 let rules_text = document.getElementById("rules-text");
 let time_text = document.getElementById("time-text");
+let return_text = document.getElementById("return-text");
 const root = document.querySelector(":root");
 const btn_confirm = document.getElementById("btn-confirm");
 const btn_pasapalabra = document.getElementById("btn-pasapalabra");
 const btn_end = document.getElementById("btn-end");
+
 
 // valor que cambia el set de preguntas
 let gameNumber = -1;
@@ -428,6 +430,7 @@ const timeLimit = () => {
   btn_end.disabled = true;
   result_text.innerHTML = `¡ Se ha acabado el tiempo ! <br><br> Preguntas acertadas ${correctAnswer}, equivocadas ${wrongAnswer}, sin responder ${pendingQuestion}<br><br>Tu Puntuación ha sido de ${score}`;
   result_text.classList.remove("ds-none");
+  return_text.classList.remove("ds-none");
   time_text.textContent = 0;
   gameActive = false;
   ranking.push({ userName: userName, points: score });
@@ -467,6 +470,7 @@ const checkVictory = () => {
     gameActive = false;
     result_text.innerHTML = `¡ Has terminado ! <br><br> Preguntas acertadas ${correctAnswer}, equivocadas ${wrongAnswer}, sin responder ${pendingQuestion}<br><br>Tu Puntuación ha sido de ${score}`;
     result_text.classList.remove("ds-none");
+    return_text.classList.remove("ds-none");
     ranking.push({ userName: userName, points: score });
     clearTimeout(timeout);
     clearInterval(timer);
@@ -577,6 +581,7 @@ const end = () => {
   reset();
   result_text.innerHTML = `¡ Gracias por participar ! <br><br> Preguntas acertadas ${correctAnswer}, equivocadas ${wrongAnswer}, sin responder ${pendingQuestion}<br><br>Tu Puntuación ha sido de ${score}`;
   result_text.classList.remove("ds-none");
+  return_text.classList.remove("ds-none");
   btn_end.disabled = true;
   gameActive = false;
   clearTimeout(timeout);
@@ -598,6 +603,7 @@ const logKey = (e) => {
   }
 
   if (coverActive) {
+    return_text.classList.add("ds-none");
     result_text.classList.add("ds-none");
     ranking_text.classList.add("ds-none");
     rules_text.classList.add("ds-none");
@@ -607,6 +613,7 @@ const logKey = (e) => {
 
 const logClick = () => {
   if (coverActive) {
+    return_text.classList.add("ds-none");
     result_text.classList.add("ds-none");
     ranking_text.classList.add("ds-none");
     rules_text.classList.add("ds-none");
@@ -620,6 +627,7 @@ document.addEventListener("keydown", logKey);
 //abrir reglas y clasificación
 const openTab = (element) => {
   element.classList.remove("ds-none");
+  return_text.classList.remove("ds-none");
   setTimeout(function () {
     (coverActive = true), 1000;
   });

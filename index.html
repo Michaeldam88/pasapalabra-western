@@ -47,7 +47,7 @@
         <div class="central-container">
           <div class="questions-container">
             <p id="questions" class="questions"></p>
-          </div>          
+          </div>
           <input
             id="userAnswer"
             class="userAnswer ds-none"
@@ -56,23 +56,22 @@
           />
           <div class="question-btn-container">
             <button
-            id="btn-confirm"
-            onClick="checkAnswer()"
-            class="btn-confirm ds-none"
-          >
-            Confirmar
-          </button>
+              id="btn-confirm"
+              onClick="checkAnswer()"
+              class="btn-confirm ds-none"
+            >
+              Confirmar
+            </button>
 
-          <button
-            id="btn-pasapalabra"
-            onClick="pasapalabra()"
-            class="btn-pasapalabra ds-none"
-          >
-            Pasapalabra
-          </button>
-
+            <button
+              id="btn-pasapalabra"
+              onClick="pasapalabra()"
+              class="btn-pasapalabra ds-none"
+            >
+              Pasapalabra
+            </button>
           </div>
-          
+
           <p id="check-text" class="check-text"></p>
         </div>
       </div>
@@ -84,24 +83,24 @@
           letra del alfabeto en menos de 3 minutos.<br /><br />Obtendremos un
           punto por cada respuesta acertada y perderemos un punto por cada
           respuesta erronea.<br /><br />Podemos teclear ENTER para pasar palabla
-          para pasar a la siguiente pregunta<br /><br />Si interrumpimpos el
+          y proceder a la siguiente pregunta<br /><br />Si interrumpimpos el
           juego antes de terminar las preguntas no se registrará la puntuación
           en el ranking.
         </p>
+
+        <p id="return-text" class="return-text ds-none">Hacer click en la pagina para volver</p>
         <button onClick="openTab(ranking_text)" class="ranking">
           Clasificción
         </button>
-        <p id="ranking-text" class="ranking-text ds-none">Ranking</p>        
+        <p id="ranking-text" class="ranking-text ds-none">Ranking</p>
 
         <p id="result-text" class="result-text ds-none"></p>
-        <div class="time-cont">          
+        <div class="time-cont">
           <p id="time-text" class="time-text">180"</p>
         </div>
 
         <div class="main-buttons">
-          <button onClick="newGame()" class="btn-new-game">
-            Nuevo Juego
-          </button>
+          <button onClick="newGame()" class="btn-new-game">Nuevo Juego</button>
           <button disabled id="btn-end" onClick="end()" class="btn-end">
             Terminar el Juego
           </button>
@@ -109,7 +108,9 @@
       </div>
     </div>
 
-    <script type="text/javascript">document.querySelector("body").style.height = innerHeight+"px";</script>
+    <script type="text/javascript">
+      document.querySelector("body").style.height = innerHeight + "px";
+    </script>
     <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
