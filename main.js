@@ -552,11 +552,11 @@ const checkAnswer = () => {
       letter.classList.remove("__yellow");
       letter.classList.add("__red");
       check_text.innerHTML =
-        "Respuesta Incorrecta<br>La correcta era " +
+        "La respuesta correcta es " +
         questionsArr[gameNumber][questionN].answer;
       setTimeout(function () {
         check_text.textContent = "";
-      }, 1500);
+      }, 2000);
       questionN += 1;
       userAnswer.value = "";
       checkVictory();

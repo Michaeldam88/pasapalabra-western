@@ -141,6 +141,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   font-family: "Roboto", sans-serif;
+  background-position: center;
 }
 
 .main-container {
@@ -219,6 +220,9 @@ body {
   position: absolute;
   top: 4rem;
   left: 4rem;
+  background-image: url("./IMG/cartel.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .rules-text {
@@ -231,7 +235,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   font-size: 1.2rem;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
   padding: 4rem;
 }
@@ -241,6 +245,9 @@ body {
   position: absolute;
   top: 4rem;
   right: 4rem;
+  background-image: url("./IMG/cartel.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .ranking-text {
@@ -268,27 +275,50 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   font-size: 1.2rem;
-  z-index: 1;
+  z-index: 2;
   text-align: center;
   padding: 4rem;
-}
-
-.central-container {
-  width: 20rem;
-  height: 20rem;
-  position: absolute;
-  top: calc(50% - 10rem);
-  left: calc(50% - 10rem);3666
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .time-cont {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   bottom: 4rem;
-  left: 4rem;
+  left: 1rem;
+  width: 8rem;
+  height: 8rem;
+  background-image: url("./IMG/reloj.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.time-text {
+  padding-top: 2.3rem;
+  font-size: 1.3rem;
+}
+
+button {
+  background-color: #574731;
+  color: #f2edeb;
+  margin-bottom: 0.5rem;
+  height: 45px;
+  border-radius: 3px;
+  font-size: 1rem;
+  padding: 0 1.5rem;
+  border: none;
+  box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.48);
+}
+
+button:disabled {
+  opacity: 50%;
+  box-shadow: none;
+}
+
+button:active {
+  box-shadow: none;
 }
 
 .main-buttons {
@@ -299,12 +329,96 @@ body {
   flex-direction: column;
 }
 
+.btn-new-game {
+  background-image: url("./IMG/cartel.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.btn-end {
+  background-image: url("./IMG/cartel.png");
+  background-size: cover;
+
+  background-position: -1px;
+}
+
+.central-container {
+  width: 24rem;
+  height: 20rem;
+  position: absolute;
+  top: 17rem;
+  left: 15rem;
+  background-image: url("./IMG/tablero-min.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.questions-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 5.8rem;
+  margin-top: 0.5rem;
+}
+
 .questions {
   color: aliceblue;
+  font-size: 0.95rem;
+  line-height: 1.2rem;
+  text-align: center;
+}
+
+.userAnswer {
+  margin-top: 2rem;
+  margin-right: 3%;
+  width: 80%;
+  height: 3rem;
+  padding: 0.2rem;
+  display: block;
+  font-size: 1.25em;
+  text-align: center;
+  display: block;
+  color: aliceblue;
+  background-color: #ffffff40;
+  border: none;
+  border-radius: 3px;
+  
+}
+
+.userAnswer:focus {
+  outline: none;
+}
+
+.question-btn-container {
+  margin-top: 3rem;
+  width: 95%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .check-text {
+  margin-top: 0.4rem;
+  font-size: 0.9rem;
+  text-align: center;
   color: aliceblue;
+  width: 100%;
+}
+
+.btn-pasapalabra {
+  margin: 0;
+  background-color: #dc9e50d6;
+  width: 35%;
+}
+
+.btn-confirm {
+  margin: 0;
+  background-color: #dc9e50d6;
+  width: 35%;
 }
 
 .ds-none {
@@ -321,16 +435,4 @@ body {
 
 .__red {
   border: #e63f3fc2 4px solid;
-}
-
-button {
-  background-color: #574731;
-  color: #f2edeb;
-  border: 0;
-  margin-bottom: 0.5rem;
-  height: 38px;
-  border-radius: 3px;
-  border: 3px solid #bbb1a5;
-  font-size: 14px;
-  padding: 0 1.5rem;
 }
