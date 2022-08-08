@@ -242,8 +242,10 @@ body {
 
 .return-text {
   position: absolute;
+  text-align: center;
+  width: 100%;
   bottom: 3rem;
-  left: 45%;
+  left: 0;
   z-index: 3;
   font-size: 1rem;
 }

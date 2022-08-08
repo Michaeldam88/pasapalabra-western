@@ -471,6 +471,7 @@ const checkVictory = () => {
     result_text.innerHTML = `¡ Has terminado ! <br><br> Preguntas acertadas ${correctAnswer}, equivocadas ${wrongAnswer}, sin responder ${pendingQuestion}<br><br>Tu Puntuación ha sido de ${score}`;
     result_text.classList.remove("ds-none");
     return_text.classList.remove("ds-none");
+    btn_end.disabled = true;
     ranking.push({ userName: userName, points: score });
     clearTimeout(timeout);
     clearInterval(timer);
