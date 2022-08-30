@@ -370,7 +370,7 @@ let correctAnswer,
   score = 0;
 let gameActive = false;
 let coverActive = false;
-let userName, currentLetter, time, timer, timeout, rotation,gameNumber;
+let userName, currentLetter, time, timer, timeout, rotation, gameNumber;
 
 let questions = document.getElementById("questions");
 let check_text = document.getElementById("check-text");
@@ -394,8 +394,7 @@ const newGame = () => {
   gameActive = true;
   questionN = -1;
   rotation = 360 / 27;
-  gameNumber = Math.floor(Math.random() * questionsArr.length)
-  console.log(gameNumber)
+  gameNumber = Math.floor(Math.random() * questionsArr.length);
   questionsArr[gameNumber].forEach((element) => (element.status = 0));
   questionsArr[gameNumber].forEach((element) => {
     let e = document.getElementById(element.letter);
