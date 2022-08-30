@@ -370,7 +370,7 @@ let correctAnswer,
   score = 0;
 let gameActive = false;
 let coverActive = false;
-let userName, letter, time, timer, timeout, rotation;
+let userName, currentLetter, time, timer, timeout, rotation,gameNumber;
 
 let questions = document.getElementById("questions");
 let check_text = document.getElementById("check-text");
@@ -385,20 +385,6 @@ const btn_confirm = document.getElementById("btn-confirm");
 const btn_pasapalabra = document.getElementById("btn-pasapalabra");
 const btn_end = document.getElementById("btn-end");
 
-
-// valor que cambia el set de preguntas
-let gameNumber = -1;
-
-// resetear todo
-const reset = () => {
-  check_text.textContent = "";
-  userAnswer.value = "";
-  questions.textContent = "";
-  btn_pasapalabra.classList.add("ds-none");
-  btn_confirm.classList.add("ds-none");
-  userAnswer.classList.add("ds-none");  
-};
-
 //nuevo Juego
 const newGame = () => {
   //preguntamos y guardamos el nombre
@@ -406,9 +392,10 @@ const newGame = () => {
   btn_confirm.classList.remove("ds-none");
   userAnswer.classList.remove("ds-none");
   gameActive = true;
-  questionN = 0;
-  rotation = 13.3;
-  gameNumber < questionsArr.length - 1 ? gameNumber++ : (gameNumber = 0);
+  questionN = -1;
+  rotation = 360 / 27;
+  gameNumber = Math.floor(Math.random() * questionsArr.length)
+  console.log(gameNumber)
   questionsArr[gameNumber].forEach((element) => (element.status = 0));
   questionsArr[gameNumber].forEach((element) => {
     let e = document.getElementById(element.letter);
@@ -421,28 +408,49 @@ const newGame = () => {
   userAnswer.focus();
   btn_end.disabled = false;
   scoreUpdate();
-  newQuestion();  
+  newQuestion();
+};
+
+// resetear todo
+const reset = () => {
+  check_text.textContent = "";
+  userAnswer.value = "";
+  questions.textContent = "";
+  btn_pasapalabra.classList.add("ds-none");
+  btn_confirm.classList.add("ds-none");
+  userAnswer.classList.add("ds-none");
+  btn_end.disabled = true;
+  gameActive = false;
+  clearTimeout(timeout);
+  clearInterval(timer);
+};
+
+//Guardamos los resultados en local storage
+const saveResults = () => {
+  ranking.push({ userName: userName, points: score });
+  const orderRanking = ranking.sort((a, b) => b.points - a.points);
+  const showRankingOrdered = orderRanking.reduce((acc, next) => {
+    return `${acc}${next.userName}: ${next.points} Puntos<br><br>`;
+  }, `Ranking <br><br><br>`);
+  ranking_text.innerHTML = showRankingOrdered;
+};
+
+//Visualizamos los resultaso
+const showResults = () => {
+  result_text.classList.remove("ds-none");
+  return_text.classList.remove("ds-none");
+  setTimeout(function () {
+    (coverActive = true), 1000;
+  });
 };
 
 //limite de tiempo
 const timeLimit = () => {
-  reset();
-  btn_end.disabled = true;
   result_text.innerHTML = `¡ Se ha acabado el tiempo ! <br><br> Preguntas acertadas ${correctAnswer}, equivocadas ${wrongAnswer}, sin responder ${pendingQuestion}<br><br>Tu Puntuación ha sido de ${score}`;
-  result_text.classList.remove("ds-none");
-  return_text.classList.remove("ds-none");
+  reset();
   time_text.textContent = 0;
-  gameActive = false;
-  ranking.push({ userName: userName, points: score });
-  const orderRanking = ranking.sort((a, b) => b.points - a.points);
-  const showOrderRanking = orderRanking.reduce((acc, next) => {
-    return `${acc}${next.userName}: ${next.points} Puntos<br><br>`;
-  }, `Ranking <br><br><br>`);
-  ranking_text.innerHTML = showOrderRanking;
-  setTimeout(function () {
-    (coverActive = true), 1000;
-  });
-  clearInterval(timer);
+  saveResults();
+  showResults();
 };
 
 // actualizazion timer
@@ -466,24 +474,10 @@ const scoreUpdate = () => {
 const checkVictory = () => {
   scoreUpdate();
   if (questionsArr[gameNumber].every((element) => element.status > 1)) {
-    reset();
-    gameActive = false;
     result_text.innerHTML = `¡ Has terminado ! <br><br> Preguntas acertadas ${correctAnswer}, equivocadas ${wrongAnswer}, sin responder ${pendingQuestion}<br><br>Tu Puntuación ha sido de ${score}`;
-    result_text.classList.remove("ds-none");
-    return_text.classList.remove("ds-none");
-    btn_end.disabled = true;
-    ranking.push({ userName: userName, points: score });
-    clearTimeout(timeout);
-    clearInterval(timer);
-    const orderRanking = ranking.sort((a, b) => b.points - a.points);
-    const showOrderRanking = orderRanking.reduce((acc, next) => {
-      return `${acc}${next.userName}: ${next.points} Puntos<br><br>`;
-    }, `Ranking <br><br><br>`);
-
-    ranking_text.innerHTML = showOrderRanking;
-    setTimeout(function () {
-      (coverActive = true), 1000;
-    });
+    reset();
+    saveResults();
+    showResults();
   } else {
     newQuestion();
   }
@@ -491,6 +485,8 @@ const checkVictory = () => {
 
 //Comprobamos que pregunta tenemos que hacer
 const newQuestion = () => {
+  questionN += 1;
+  userAnswer.value = "";
   userAnswer.focus();
   root.style.setProperty(
     "--pseudo-rotate",
@@ -501,13 +497,12 @@ const newQuestion = () => {
   }
 
   if (questionsArr[gameNumber][questionN].status < 2) {
-    letter = document.getElementById(
+    currentLetter = document.getElementById(
       questionsArr[gameNumber][questionN].letter
     );
     questions.textContent = questionsArr[gameNumber][questionN].question;
     moveLetters();
   } else {
-    questionN += 1;
     newQuestion();
   }
 };
@@ -540,10 +535,8 @@ const checkAnswer = () => {
   switch (texto_userAnswer) {
     case questionsArr[gameNumber][questionN].answer:
       questionsArr[gameNumber][questionN].status = 2;
-      questionN += 1;
-      letter.classList.remove("__yellow");
-      letter.classList.add("__green");
-      userAnswer.value = "";
+      currentLetter.classList.remove("__yellow");
+      currentLetter.classList.add("__green");
       checkVictory();
       break;
 
@@ -554,61 +547,45 @@ const checkAnswer = () => {
 
     default:
       questionsArr[gameNumber][questionN].status = 3;
-      letter.classList.remove("__yellow");
-      letter.classList.add("__red");
+      currentLetter.classList.remove("__yellow");
+      currentLetter.classList.add("__red");
       check_text.innerHTML =
         "La respuesta correcta es " +
         questionsArr[gameNumber][questionN].answer;
       setTimeout(function () {
         check_text.textContent = "";
       }, 2000);
-      questionN += 1;
-      userAnswer.value = "";
       checkVictory();
   }
 };
 
-//boton pasapalabra
+//pasapalabra
 const pasapalabra = () => {
   questionsArr[gameNumber][questionN].status = 1;
-  letter.classList.add("__yellow");
-  questionN += 1;
-  userAnswer.value = "";
+  currentLetter.classList.add("__yellow");
   newQuestion();
 };
 
 //terminar el juego con antelación
 const end = () => {
-  reset();
   result_text.innerHTML = `¡ Gracias por participar ! <br><br> Preguntas acertadas ${correctAnswer}, equivocadas ${wrongAnswer}, sin responder ${pendingQuestion}<br><br>Tu Puntuación ha sido de ${score}`;
-  result_text.classList.remove("ds-none");
-  return_text.classList.remove("ds-none");
-  btn_end.disabled = true;
-  gameActive = false;
-  clearTimeout(timeout);
-  clearInterval(timer);
-  setTimeout(function () {
-    (coverActive = true), 1000;
-  });
+  reset();
+  showResults();
 };
 
-// activamos la funcionalidad del teclado
+// activamos la funcionalidad del teclado y del ratón
 const logKey = (e) => {
-  if (gameActive) {
-    e = e.key;
-    if (e === "Space") {
-      pasapalabra();
-    } else if (e === "Enter") {
-      checkAnswer();
-    }
-  }
-
   if (coverActive) {
     return_text.classList.add("ds-none");
     result_text.classList.add("ds-none");
     ranking_text.classList.add("ds-none");
     rules_text.classList.add("ds-none");
     coverActive = false;
+    return;
+  }
+
+  if (gameActive && e.key === "Enter") {
+    checkAnswer();
   }
 };
 
@@ -622,9 +599,6 @@ const logClick = () => {
   }
 };
 
-document.addEventListener("click", logClick);
-document.addEventListener("keydown", logKey);
-
 //abrir reglas y clasificación
 const openTab = (element) => {
   element.classList.remove("ds-none");
@@ -633,3 +607,7 @@ const openTab = (element) => {
     (coverActive = true), 1000;
   });
 };
+
+document.addEventListener("click", logClick);
+document.addEventListener("keydown", logKey);
+btn_pasapalabra.addEventListener("click", pasapalabra);
