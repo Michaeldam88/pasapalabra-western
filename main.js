@@ -372,15 +372,16 @@ let gameActive = false;
 let coverActive = false;
 let userName, currentLetter, time, timer, timeout, rotation, gameNumber;
 
-let questions = document.getElementById("questions");
-let check_text = document.getElementById("check-text");
-let result_text = document.getElementById("result-text");
-let userAnswer = document.getElementById("userAnswer");
-let ranking_text = document.getElementById("ranking-text");
-let rules_text = document.getElementById("rules-text");
-let time_text = document.getElementById("time-text");
-let return_text = document.getElementById("return-text");
+const questions = document.getElementById("questions");
+const check_text = document.getElementById("check-text");
+const result_text = document.getElementById("result-text");
+const userAnswer = document.getElementById("userAnswer");
+const ranking_text = document.getElementById("ranking-text");
+const rules_text = document.getElementById("rules-text");
+const time_text = document.getElementById("time-text");
+const return_text = document.getElementById("return-text");
 const root = document.querySelector(":root");
+const circle_container = document.getElementById("circle-container");
 const btn_confirm = document.getElementById("btn-confirm");
 const btn_pasapalabra = document.getElementById("btn-pasapalabra");
 const btn_end = document.getElementById("btn-end");
@@ -408,6 +409,10 @@ const newGame = () => {
   btn_end.disabled = false;
   scoreUpdate();
   newQuestion();
+  onresize(circle_container, function () {  
+    translateValue  = circle_container.offsetHeight /2.55 + "px";  
+    moveLetters()    
+  });
 };
 
 // resetear todo
@@ -507,7 +512,14 @@ const newQuestion = () => {
 };
 
 // mover letras
-const moveLetters = () => {
+let translateValue;
+
+const onresize = (dom_elem, callback) => {
+  const resizeObserver = new ResizeObserver(() => callback());
+  resizeObserver.observe(dom_elem);
+};
+
+const moveLetters = () => {  
   let num = 0;
   let letterPosition = 27 - questionN;
   for (let i = 0; i < questionsArr[gameNumber].length; i++) {
@@ -523,7 +535,7 @@ const moveLetters = () => {
 
     document.getElementById(
       questionsArr[gameNumber][i].letter
-    ).style.transform = `rotate(${-rotation}deg) translate(21.1rem) rotate(${rotation}deg)`;
+    ).style.transform = `rotate(${-rotation}deg) translate(${translateValue}) rotate(${rotation}deg)`;
     num++;
   }
 };

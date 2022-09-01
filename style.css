@@ -145,6 +145,9 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;  
+  min-width: 900px;
+  min-height: 680px;
+  overflow: hidden;
 }
 
 .main-container {
@@ -178,7 +181,7 @@ body {
   background-image: url("./IMG//rueda.png");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: auto 100%;
   transform: var(--pseudo-rotate);
   transition: all 0.5s;
 }
@@ -221,7 +224,7 @@ body {
   display: block;
   position: absolute;
   top: 4rem;
-  left: 4rem;
+  left: 2rem;
   background-image: url("./IMG/cartel.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -256,7 +259,7 @@ body {
   display: block;
   position: absolute;
   top: 4rem;
-  right: 4rem;
+  right: 2rem;
   background-image: url("./IMG/cartel.png");
   background-size: cover;
   background-repeat: no-repeat;
@@ -268,7 +271,7 @@ body {
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 4rem;
+  bottom: 3rem;
   left: 1rem;
   width: 8rem;
   height: 8rem;
@@ -306,8 +309,8 @@ button:active {
 
 .main-buttons {
   position: absolute;
-  right: 4rem;
-  bottom: 4rem;
+  right: 2rem;
+  bottom: 3rem;
   display: flex;
   flex-direction: column;
 }
@@ -325,18 +328,19 @@ button:active {
 }
 
 .central-container {
-  width: 30%;
-  height: 36%;
+  width: 24rem;
+  height: 20rem;
+  top: calc(50% - 9.8rem);
+  left: calc(50% - 11.8rem);
+  min-width: 250px;
   position: absolute;
-  top: 32%;
-  left: 35%;
   background-image: url("./IMG/tablero-min.png");
   background-size: contain;
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 1;
+  z-index: 1;  
 }
 
 .questions-container {
