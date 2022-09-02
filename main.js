@@ -410,7 +410,7 @@ const newGame = () => {
   scoreUpdate();
   newQuestion();
   onresize(circle_container, function () {  
-    translateValue  = circle_container.offsetHeight /2.55 + "px";  
+    translateValue  = circle_container.offsetHeight;      
     moveLetters()    
   });
 };
@@ -523,6 +523,9 @@ const moveLetters = () => {
   let num = 0;
   let letterPosition = 27 - questionN;
   for (let i = 0; i < questionsArr[gameNumber].length; i++) {
+    let letter = document.getElementById(
+      questionsArr[gameNumber][i].letter
+    )
     if (letterPosition + i > 26) {
       letterPosition = 0;
       num = 0;
@@ -533,9 +536,12 @@ const moveLetters = () => {
     const rotation =
       -num * (360 / 27) - letterPosition * (360 / 27) + initialRotation;
 
-    document.getElementById(
-      questionsArr[gameNumber][i].letter
-    ).style.transform = `rotate(${-rotation}deg) translate(${translateValue}) rotate(${rotation}deg)`;
+    letter.style.transform = `rotate(${-rotation}deg) translate(${translateValue /2.57 + "px"}) rotate(${rotation}deg)`;
+    letter.style.width = translateValue / 17 + "px";
+    letter.style.height = translateValue / 17 + "px";
+    letter.style.top = "calc(50% - " + translateValue /33 + "px)";
+    letter.style.left = "calc(50% - " + translateValue /33 + "px)";
+
     num++;
   }
 };
