@@ -361,7 +361,7 @@ const questionsArr = [
   ],
 ];
 
-const ranking = [];
+let ranking = [];
 
 let correctAnswer,
   wrongAnswer,
@@ -431,12 +431,15 @@ const reset = () => {
 
 //Guardamos los resultados en local storage
 const saveResults = () => {
+  let localSavedRanking = JSON.parse(localStorage.getItem("ranking"))
+  if (localSavedRanking !== null) ranking = localSavedRanking;
   ranking.push({ userName: userName, points: score });
   const orderRanking = ranking.sort((a, b) => b.points - a.points);
   const showRankingOrdered = orderRanking.reduce((acc, next) => {
     return `${acc}${next.userName}: ${next.points} Puntos<br><br>`;
-  }, `Ranking <br><br><br>`);
-  ranking_text.innerHTML = showRankingOrdered;
+  }, `Ranking <br><br><br>`)
+  ranking_text.innerHTML = showRankingOrdered;    
+  localStorage.setItem("ranking",JSON.stringify(ranking))
 };
 
 //Visualizamos los resultaso
