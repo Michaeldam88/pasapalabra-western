@@ -59,10 +59,7 @@
             name="userAnswer"
           />
           <div class="question-btn-container">
-            <button
-              id="btn-confirm"              
-              class="central-btn ds-none"
-            >
+            <button id="btn-confirm" class="central-btn ds-none">
               Confirmar
             </button>
 
@@ -79,8 +76,8 @@
         <button onClick="openTab(rules_text)" class="rules">Reglas</button>
         <p id="rules-text" class="overlay-text ds-none">
           Reglas<br /><br /><br />Tenemos que contestar a una pregunta por cada
-          letra del alfabeto en menos de 3 minutos.<br /><br />Obtendremos un
-          punto por cada respuesta acertada y perderemos un punto por cada
+          letra del alfabeto en menos de 3 minutos y medio.<br /><br />Obtendremos
+          un punto por cada respuesta acertada y perderemos un punto por cada
           respuesta errónea.<br /><br />Podemos teclear ENTER para pasar palabra
           y proceder a la siguiente pregunta<br /><br />Si interrumpimos el
           juego antes de terminar las preguntas no se registrará la puntuación
@@ -94,11 +91,13 @@
 
         <p id="result-text" class="overlay-text ds-none"></p>
         <div class="time-cont">
-          <p id="time-text" class="time-text">180"</p>
+          <p id="time-text" class="time-text">210"</p>
         </div>
 
         <div class="main-buttons">
-          <button onClick="addUserName()" class="btn-new-game">Nuevo Juego</button>
+          <button onClick="addUserName()" class="btn-new-game">
+            Nuevo Juego
+          </button>
           <button disabled id="btn-end" onClick="end()" class="btn-end">
             Terminar el Juego
           </button>

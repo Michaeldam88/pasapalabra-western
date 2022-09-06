@@ -22,6 +22,8 @@ const circle_container = document.getElementById("circle-container");
 const btn_confirm = document.getElementById("btn-confirm");
 const btn_pasapalabra = document.getElementById("btn-pasapalabra");
 const btn_end = document.getElementById("btn-end");
+const btn_newGame = document.querySelector(".btn-new-game");
+const time_cont = document.querySelector(".time-cont");
 let localSavedRanking = JSON.parse(localStorage.getItem("ranking"));
 
 //nuevo Juego
@@ -32,16 +34,18 @@ const newGame = () => {
   rotation = 360 / 27;
   gameNumber = Math.floor(Math.random() * questionsArr.length);
   questions.style.fontSize = "0.95rem";
+  result_text.innerHTML = "";
   questionsArr[gameNumber].forEach((element) => (element.status = 0));
   questionsArr[gameNumber].forEach((element) => {
     let e = document.getElementById(element.letter);
     e.classList.remove("__yellow", "__red", "__green");
   });
-  time = 180;
-  timeout = setTimeout(timeLimit, 180000);
+  time = 210;
+  timeout = setTimeout(timeLimit, 210000);
   timerUpdate();
   userAnswer.focus();
   btn_end.disabled = false;
+  btn_newGame.disabled = true;
   scoreUpdate();
   newQuestion();
   onresize(circle_container, function () {
@@ -56,6 +60,7 @@ const addUserName = () => {
   userAnswer.classList.remove("ds-none");
   questions.style.fontSize = "1.5rem";
   questions.textContent = "¡ Añade tu nombre !";
+  userAnswer.focus();
 };
 
 // resetear todo
@@ -67,6 +72,7 @@ const reset = () => {
   btn_confirm.classList.add("ds-none");
   userAnswer.classList.add("ds-none");
   btn_end.disabled = true;
+  btn_newGame.disabled = false;
   gameActive = false;
   clearTimeout(timeout);
   clearInterval(timer);
@@ -107,6 +113,33 @@ let timerUpdate = () => {
   time--;
   timer = setInterval(function () {
     time_text.textContent = time + '"';
+
+    if (time === 60) {
+      time_cont.style.height = "10rem";
+      time_cont.style.width = "10rem";
+      time_text.style.fontSize = "1.6rem";
+      time_cont.style.backgroundColor = "#fff4004a";
+      setTimeout(function () {
+        time_cont.style.height = "8rem";
+        time_cont.style.width = "8rem";
+        time_text.style.fontSize = "1.3rem";
+        time_cont.style.backgroundColor = "transparent";
+      }, 2000);
+    }
+
+    if (time === 30) {
+      time_cont.style.height = "10rem";
+      time_cont.style.width = "10rem";
+      time_text.style.fontSize = "1.6rem";
+      time_cont.style.backgroundColor = "#ff000045";
+      setTimeout(function () {
+        time_cont.style.height = "8rem";
+        time_cont.style.width = "8rem";
+        time_text.style.fontSize = "1.3rem";
+        time_cont.style.backgroundColor = "transparent";
+      }, 2000);
+    }
+
     time--;
   }, 1000);
 };
@@ -267,12 +300,9 @@ const openTab = (element) => {
   // si abrimos la clasificación y hay resultados en memoria, los visulizamos
   if (element.id === "ranking-text") {
     if (localSavedRanking !== null) {
-      ranking_text.innerHTML = localSavedRanking.reduce(
-        (acc, next) => {
-          return `${acc}${next.userName}: ${next.points} Puntos<br><br>`;
-        },
-        `Ranking <br><br><br>`
-      );
+      ranking_text.innerHTML = localSavedRanking.reduce((acc, next) => {
+        return `${acc}${next.userName}: ${next.points} Puntos<br><br>`;
+      }, `Ranking <br><br><br>`);
     }
   }
   return_text.classList.remove("ds-none");
