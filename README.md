@@ -6,7 +6,7 @@ Utiliza local storage para los resultados
 
 Resolución minima 900px * 680px
 
-https://raw.githubusercontent.com/Michaeldam88/pasapalabra-western/main/IMG/ScreenShot.png
+![alt text](https://raw.githubusercontent.com/Michaeldam88/pasapalabra-western/main/IMG/ScreenShot.png)
 
 Pruebalo aqui:
 https://michaeldam88.github.io/pasapalabra-western/
