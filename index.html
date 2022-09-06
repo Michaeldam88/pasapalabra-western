@@ -44,7 +44,9 @@
         <div id="y" class="circle"><h2>Y</h2></div>
         <div id="z" class="circle"><h2>Z</h2></div>
 
-        <p id="return-text" class="return-text ds-none">Hacer click en la pagina para volver</p>
+        <p id="return-text" class="return-text ds-none">
+          Hacer click en la pagina para volver
+        </p>
 
         <div class="central-container">
           <div class="questions-container">
@@ -58,24 +60,19 @@
           />
           <div class="question-btn-container">
             <button
-              id="btn-confirm"
-              onClick="checkAnswer()"
+              id="btn-confirm"              
               class="central-btn ds-none"
             >
               Confirmar
             </button>
 
-            <button
-              id="btn-pasapalabra"              
-              class="central-btn ds-none"
-            >
+            <button id="btn-pasapalabra" class="central-btn ds-none">
               Pasapalabra
             </button>
           </div>
 
           <p id="check-text" class="check-text"></p>
         </div>
-        
       </div>
 
       <div class="buttons-container">
@@ -89,7 +86,7 @@
           juego antes de terminar las preguntas no se registrará la puntuación
           en el ranking.
         </p>
-        
+
         <button onClick="openTab(ranking_text)" class="ranking">
           Clasificción
         </button>
@@ -101,14 +98,15 @@
         </div>
 
         <div class="main-buttons">
-          <button onClick="newGame()" class="btn-new-game">Nuevo Juego</button>
+          <button onClick="addUserName()" class="btn-new-game">Nuevo Juego</button>
           <button disabled id="btn-end" onClick="end()" class="btn-end">
             Terminar el Juego
           </button>
         </div>
       </div>
     </div>
-        
+
+    <script type="text/javascript" src="questions.js"></script>
     <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
