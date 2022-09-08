@@ -378,7 +378,7 @@ const questionsArr = [
       answer: "cicerone",
       status: 0,
       question:
-        "CON LA C. En los barcos, especie de armario que está fijo en la cubierta y situado muy cerca del timón donde se pone la brújula.",
+        "CON LA C. Persona que sirve a otras de guía y les va enseñando y explicando lugares y cosas interesantes.",
     },
     {
       letter: "d",
