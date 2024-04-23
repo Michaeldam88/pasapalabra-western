@@ -1,7 +1,5 @@
 # Pasapalabra Western
 
-Prueba del pre-curso del bootcamp Isdi Coders 2022
-
 Pasapalabra Western is an interactive web-based game inspired by the classic Spanish game show "Pasapalabra."
 This game challenges players to answer alphabetically themed questions against a 3.5-minute timer. Set in a vibrant Western motif, the game incorporates HTML, CSS, and JavaScript to deliver a dynamic user experience, complete with a scoring system that records high scores using local storage. Ideal for testing knowledge under pressure, it offers both entertainment and educational value.
 
